@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CodingTest</string>
+    <string name="base_url">http://www.mocky.io/</string>
+    <string name="title_tab_question_1">Contacts</string>
+</resources>
