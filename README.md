@@ -9,12 +9,12 @@ Instructions
 * Clone it to your local machine.
 * Spend no more than 2 hours working on the following tasks:
 
-1. Bug fix: the app crashes on loading the list of contacts from the API.
-2. New feature: Ability to view all the data about a given contact by tapping on a contact in the list view and opening a new contact details page.
-3. New feature: Ability to view contacts which share the hobbies of any contact I am viewing on the contact details page.
-4. New feature: Ability to tap on the "call" icon in the contact list to automatically phone the contact.
-5. New feature: Ability to tap on the "email" icon in the contact list to launch my preferred email, composing a new email to the contact.
-6. New feature: A new "close app" menu option visible on all tabs.
+    1. Bug fix: the app crashes on loading the list of contacts from the API.
+    2. New feature: Ability to view all the data about a given contact by tapping on a contact in the list view and opening a new contact details page.
+    3. New feature: Ability to view contacts which share the hobbies of any contact I am viewing on the contact details page.
+    4. New feature: Ability to tap on the "call" icon in the contact list to automatically phone the contact.
+    5. New feature: Ability to tap on the "email" icon in the contact list to launch my preferred email, composing a new email to the contact.
+    6. New feature: A new "close app" menu option visible on all tabs.
 
 * Commit and push your work to your remote GitHub repository.
 * Submit a pull request to us on GitHub for your changes.
