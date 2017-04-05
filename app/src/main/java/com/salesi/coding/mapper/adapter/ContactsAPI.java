@@ -12,6 +12,6 @@ import retrofit2.http.GET;
  */
 
 public interface ContactsAPI {
-    @GET("/v2/58dd146c28000021049e4a23")
+    @GET("/v2/58e4f80f1100004e00bfc4b3")
     Call<List<ContactEntity>> fetchContacts();
 }

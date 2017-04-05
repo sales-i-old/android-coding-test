@@ -23,7 +23,7 @@ Friendly Advice
 ------------------
 * Use Android Studio.
 * Make a series of small, logical commits, with good commit comments rather than one large commit for all your work.
-* The contacts data which the app gets is hosted [here](http://www.mocky.io/v2/58dd146c28000021049e4a23).
+* The contacts data which the app gets is hosted [here](http://www.mocky.io/v2/58e4f80f1100004e00bfc4b3).
 * The project is using [Dagger 2](https://google.github.io/dagger/) for dependency injection and [Butterknife](http://jakewharton.github.io/butterknife/) for binding views. Ideally you will use these as well. If however you've never used them, we'd advise completing the test with your choice of frameworks (or none at all) rather than trying to learn these during the test.
 * If you are unsure of how best to implement the new features, use your best judgement to create a functional and usable app.
 * If you have technical issues preventing you from completing the test, please let your recruiter know and we'll help.
