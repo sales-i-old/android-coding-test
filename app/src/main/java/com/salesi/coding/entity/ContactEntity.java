@@ -13,22 +13,39 @@ import com.google.gson.annotations.Expose;
  */
 
 public class ContactEntity implements Parcelable{
-    @Expose public final Integer ContactID;
-    @Expose public final String Title;
-    @Expose public final String FirstNane;
-    @Expose public final String LastName;
-    @Expose public final String[] Hobbies;
-    @Expose public final String Email;
-    @Expose public final String PhoneNumber;
+    @Expose public Integer ContactID;
+    @Expose public String Title;
+    @Expose public String FirstNane;
+    @Expose public String LastName;
+    @Expose public String[] Hobbies;
+    @Expose public String Email;
+    @Expose public String PhoneNumber;
+    @Expose public Address Address;
 
-    private ContactEntity(Parcel in) {
-        ContactID = in.readInt();
+    protected ContactEntity(Parcel in) {
         Title = in.readString();
         FirstNane = in.readString();
         LastName = in.readString();
+        Hobbies = in.createStringArray();
         Email = in.readString();
         PhoneNumber = in.readString();
-        Hobbies = in.createStringArray();
+        Address = in.readParcelable(com.salesi.coding.entity.Address.class.getClassLoader());
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Title);
+        dest.writeString(FirstNane);
+        dest.writeString(LastName);
+        dest.writeStringArray(Hobbies);
+        dest.writeString(Email);
+        dest.writeString(PhoneNumber);
+        dest.writeParcelable(Address, flags);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<ContactEntity> CREATOR = new Creator<ContactEntity>() {
@@ -42,21 +59,4 @@ public class ContactEntity implements Parcelable{
             return new ContactEntity[size];
         }
     };
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(ContactID);
-        dest.writeString(Title);
-        dest.writeString(FirstNane);
-        dest.writeString(LastName);
-        dest.writeString(Email);
-        dest.writeString(PhoneNumber);
-        dest.writeStringArray(Hobbies);
-
-    }
 }

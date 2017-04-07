@@ -22,6 +22,24 @@ public class FContactDetailsActivity extends AppCompatActivity {
     @Bind(R.id.txtTitle) protected TextView txtTitle;
     @Bind(R.id.txtFirstName) protected TextView txtFirstName;
     @Bind(R.id.txtLastName) protected TextView txtLastName;
+    @Bind(R.id.txtAddress1)
+    protected TextView txtAddress1;
+    @Bind(R.id.txtAddress2)
+    protected TextView txtAddress2;
+    @Bind(R.id.txtAddress3)
+    protected TextView txtAddress3;
+    @Bind(R.id.txtAddress4)
+    protected TextView txtAddress4;
+    @Bind(R.id.txtTown)
+    protected TextView txtTown;
+    @Bind(R.id.txtCounty)
+    protected TextView txtCounty;
+    @Bind(R.id.txtPostcode)
+    protected TextView txtPostcode;
+    @Bind(R.id.txtCountry)
+    protected TextView txtCountry;
+
+
     @Bind(R.id.imgGender) protected ImageView imgGender;
     @Bind(R.id.hobbiesLinearLayout) protected LinearLayout hobbiesHolder;
     @Bind(R.id.phone)
@@ -113,6 +131,51 @@ public class FContactDetailsActivity extends AppCompatActivity {
                     myTextViews[i] = rowTextView;
                 }
             }
+
+            // Address details
+            if (contactEntity.Address != null) {
+                if (contactEntity.Address.Address1 != null)
+                    txtAddress1.setText(contactEntity.Address.Address1);
+                else
+                    txtAddress1.setVisibility(View.GONE);
+
+                if (contactEntity.Address.Address2 != null)
+                    txtAddress2.setText(contactEntity.Address.Address2);
+                else
+                    txtAddress2.setVisibility(View.GONE);
+
+                if (contactEntity.Address.Address3 != null)
+                    txtAddress3.setText(contactEntity.Address.Address3);
+                else
+                    txtAddress3.setVisibility(View.GONE);
+
+                if (contactEntity.Address.Address4 != null)
+                    txtAddress4.setText(contactEntity.Address.Address4);
+                else
+                    txtAddress4.setVisibility(View.GONE);
+
+                if (contactEntity.Address.Town != null)
+                    txtTown.setText(contactEntity.Address.Town);
+                else
+                    txtTown.setVisibility(View.GONE);
+
+                if (contactEntity.Address.County != null)
+                    txtCounty.setText(contactEntity.Address.County);
+                else
+                    txtCounty.setVisibility(View.GONE);
+
+                if (contactEntity.Address.Postcode != null)
+                    txtPostcode.setText(contactEntity.Address.Postcode);
+                else
+                    txtPostcode.setVisibility(View.GONE);
+
+                if (contactEntity.Address.Country != null)
+                    txtCountry.setText(contactEntity.Address.Country);
+                else
+                    txtCountry.setVisibility(View.GONE);
+
+            }
+
 
         }
 
