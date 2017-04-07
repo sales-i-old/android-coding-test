@@ -29,24 +29,30 @@
         android:layout_below="@+id/imgGender"
         android:layout_centerHorizontal="true"
         android:weightSum="100"
-        android:padding="5dp"
-        android:layout_marginTop="12dp">
 
+        android:layout_marginTop="12dp">
         <TextView
-            android:text="Mr"
-            android:layout_width="0dp"
+            android:text="Name: "
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            />
+        <TextView
+            android:text="Mr."
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/txtTitle"
             android:gravity="center"
-            android:layout_weight="20" />
+             />
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:text="sdsdsd"
             android:gravity="left"
             android:layout_height="wrap_content"
             android:id="@+id/txtFirstName"
-            android:layout_weight="40" />
+             />
 
         <TextView
             android:text="sdsdsdsd"
@@ -57,20 +63,7 @@
             android:layout_weight="40" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/hobbiesLinearLayout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-       android:layout_below="@+id/name_layout">
 
-        <TextView
-            android:text="Hobbies : "
-            android:textStyle="bold"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView" />
-    </LinearLayout>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -80,10 +73,12 @@
         android:tintMode="src_in"
         android:tint="@android:color/holo_red_light"
         tools:targetApi="ICE_CREAM_SANDWICH"
-        android:layout_marginBottom="20dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_above="@+id/closeApp"
+        android:layout_toLeftOf="@+id/imgGender"
+        android:layout_toStartOf="@+id/imgGender"
+        android:layout_marginRight="28dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="38dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -93,11 +88,11 @@
         android:tint="@android:color/holo_red_light"
         android:tintMode="src_in"
         tools:targetApi="ICE_CREAM_SANDWICH"
-        android:layout_marginLeft="19dp"
-        android:layout_marginStart="19dp"
-        android:layout_alignBottom="@+id/phone"
-        android:layout_toRightOf="@+id/phone"
-        android:layout_toEndOf="@+id/phone" />
+        android:layout_alignTop="@+id/phone"
+        android:layout_toRightOf="@+id/imgGender"
+        android:layout_toEndOf="@+id/imgGender"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/closeApp"
@@ -105,22 +100,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:layout_alignBottom="@+id/email"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
     <LinearLayout
         android:id="@+id/addressLinearLayout"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_below="@+id/hobbiesLinearLayout">
+        android:layout_below="@+id/name_layout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <TextView
-            android:text="Address : "
+            android:text="Address: "
             android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             />
 
         <TextView
@@ -158,4 +154,25 @@
             android:id="@+id/txtCountry" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/hobbiesLinearLayout"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/addressLinearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/addressLinearLayout"
+            android:layout_marginTop="15dp"
+            android:text="Hobbies: "
+            android:textStyle="bold" />
+    </LinearLayout>
+
 </RelativeLayout>

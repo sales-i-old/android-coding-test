@@ -23,29 +23,14 @@ public class ContactEntity implements Parcelable{
     @Expose public Address Address;
 
     protected ContactEntity(Parcel in) {
+        ContactID = in.readInt();
         Title = in.readString();
         FirstNane = in.readString();
         LastName = in.readString();
-        Hobbies = in.createStringArray();
         Email = in.readString();
         PhoneNumber = in.readString();
+        Hobbies = in.createStringArray();
         Address = in.readParcelable(com.salesi.coding.entity.Address.class.getClassLoader());
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(Title);
-        dest.writeString(FirstNane);
-        dest.writeString(LastName);
-        dest.writeStringArray(Hobbies);
-        dest.writeString(Email);
-        dest.writeString(PhoneNumber);
-        dest.writeParcelable(Address, flags);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
     }
 
     public static final Creator<ContactEntity> CREATOR = new Creator<ContactEntity>() {
@@ -59,4 +44,22 @@ public class ContactEntity implements Parcelable{
             return new ContactEntity[size];
         }
     };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(ContactID);
+        dest.writeString(Title);
+        dest.writeString(FirstNane);
+        dest.writeString(LastName);
+        dest.writeString(Email);
+        dest.writeString(PhoneNumber);
+        dest.writeStringArray(Hobbies);
+        dest.writeParcelable(Address, flags);
+
+    }
 }

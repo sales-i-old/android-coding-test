@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.salesi.coding.R;
 import com.salesi.coding.ui.screens.FContacts;
-import com.salesi.coding.ui.screens.FContactsDetails;
 
 /**
  * Tabs adapter for ViewPager
@@ -28,9 +27,7 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
             case 0 : {
                 return FContacts.instance();
             }
-            case 1 : {
-                return FContactsDetails.instance();
-            }
+
         }
         return null;
     }
@@ -41,9 +38,7 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
             case 0 : {
                 return mContext.getString(R.string.title_tab_question_1);
             }
-            case 1 : {
-                return mContext.getString(R.string.title_tab_question_2);
-            }
+
         }
         return null;
     }

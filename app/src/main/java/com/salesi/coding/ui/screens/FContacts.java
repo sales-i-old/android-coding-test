@@ -77,6 +77,7 @@ public class FContacts extends Fragment {
                                 // TODO Handle item click
                                 Intent contactDetailsIntent = new Intent(getContext(), FContactDetailsActivity.class);
                                 contactDetailsIntent.putExtra(Constants.KEY_CONTACT_DETAILS, contacts.get(position));
+                                contactDetailsIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(contactDetailsIntent);
 
                             }

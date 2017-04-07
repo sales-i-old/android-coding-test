@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 
+/**
+ * Created by Lenovo on 4/7/2017.
+ */
 
 public class Address implements Parcelable{
     @Expose public String Address1;
