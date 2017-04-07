@@ -27,6 +27,7 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
             case 0 : {
                 return FContacts.instance();
             }
+
         }
         return null;
     }
@@ -37,6 +38,7 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
             case 0 : {
                 return mContext.getString(R.string.title_tab_question_1);
             }
+
         }
         return null;
     }

@@ -21,7 +21,6 @@ public interface ApplicationComponent {
     void inject(MainApp app);
     void inject(MainActivity activity);
     void inject(FContacts contacts);
-
     @ApplicationContext Context context();
 
     Gson gson();

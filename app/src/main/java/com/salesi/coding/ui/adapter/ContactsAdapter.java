@@ -1,5 +1,6 @@
 package com.salesi.coding.ui.adapter;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
  *
  * Copyright © 2017 sales­i
  */
-public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
+public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder>   {
     private List<ContactEntity> mContacts;
 
     @Inject
@@ -53,14 +54,24 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
 
-        public ViewHolder(View itemView) {
+
+
+
+        public ViewHolder(final View itemView) {
             super(itemView);
+            Context context = itemView.getContext();
+
             ButterKnife.bind(this, itemView);
+
+
+
         }
 
         public void bind(ContactEntity entity) {
-            mId.setText(entity.ContactID);
-            mName.setText(entity.FirstName+" "+entity.LastName);
+            assert mId != null;
+            mId.setText(String.valueOf(entity.ContactID));
+            assert mName != null;
+            mName.setText(""+entity.FirstNane+" "+entity.LastName);
         }
     }
 }
