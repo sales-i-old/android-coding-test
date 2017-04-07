@@ -1,21 +1,15 @@
 package com.salesi.coding.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
-import com.salesi.coding.ui.screens.FContactsDetails;
 
 import java.util.List;
 
@@ -31,7 +25,6 @@ import butterknife.ButterKnife;
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder>   {
     private List<ContactEntity> mContacts;
-    private  Context context;
 
     @Inject
     public ContactsAdapter() {}
@@ -66,7 +59,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         public ViewHolder(final View itemView) {
             super(itemView);
-            context=itemView.getContext();
+            Context context = itemView.getContext();
 
             ButterKnife.bind(this, itemView);
 
@@ -75,7 +68,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         }
 
         public void bind(ContactEntity entity) {
+            assert mId != null;
             mId.setText(String.valueOf(entity.ContactID));
+            assert mName != null;
             mName.setText(""+entity.FirstNane+" "+entity.LastName);
         }
     }

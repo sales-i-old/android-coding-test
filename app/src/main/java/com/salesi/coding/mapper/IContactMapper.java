@@ -10,5 +10,5 @@ import java.util.List;
  * Copyright © 2017 sales­i
  */
 public interface IContactMapper {
-    List<ContactEntity> fetchContacts();
+    List fetchContacts();
 }

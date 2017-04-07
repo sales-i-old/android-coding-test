@@ -13,15 +13,15 @@ import com.google.gson.annotations.Expose;
  */
 
 public class ContactEntity implements Parcelable{
-    @Expose public Integer ContactID;
-    @Expose public String Title;
-    @Expose public String FirstNane;
-    @Expose public String LastName;
-    @Expose public String[] Hobbies;
-    @Expose public String Email;
-    @Expose public String PhoneNumber;
+    @Expose public final Integer ContactID;
+    @Expose public final String Title;
+    @Expose public final String FirstNane;
+    @Expose public final String LastName;
+    @Expose public final String[] Hobbies;
+    @Expose public final String Email;
+    @Expose public final String PhoneNumber;
 
-    protected ContactEntity(Parcel in) {
+    private ContactEntity(Parcel in) {
         ContactID = in.readInt();
         Title = in.readString();
         FirstNane = in.readString();

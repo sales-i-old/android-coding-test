@@ -1,8 +1,6 @@
 package com.salesi.coding.ui.screens;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -34,10 +32,6 @@ public class FContactsDetails extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         ((MainApp) getActivity().getApplication()).getComponent().inject(this);
-    }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
 

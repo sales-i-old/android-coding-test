@@ -24,9 +24,12 @@ public class FContactDetailsActivity extends AppCompatActivity {
     @Bind(R.id.txtLastName) protected TextView txtLastName;
     @Bind(R.id.imgGender) protected ImageView imgGender;
     @Bind(R.id.hobbiesLinearLayout) protected LinearLayout hobbiesHolder;
-    @Bind(R.id.phone) protected ImageView phoneImageView;
-    @Bind(R.id.email) protected ImageView emailImageView;
-    @Bind(R.id.closeApp) protected FloatingActionButton floatingActionButton;
+    @Bind(R.id.phone)
+    private ImageView phoneImageView;
+    @Bind(R.id.email)
+    private ImageView emailImageView;
+    @Bind(R.id.closeApp)
+    private FloatingActionButton floatingActionButton;
     private ContactEntity contactEntity;
 
     @Override
@@ -97,16 +100,16 @@ public class FContactDetailsActivity extends AppCompatActivity {
                 final TextView[] myTextViews = new TextView[size]; // create an empty array;
 
                 for (int i = 0; i < size; i++) {
-                    // create a new textview
+                    // create a new text view
                     final TextView rowTextView = new TextView(this);
 
                     // set some properties of rowTextView or something
                     rowTextView.setText(contactEntity.Hobbies[i]);
 
-                    // add the textview to the linearlayout
+                    // add the text view to the linear layout
                     hobbiesHolder.addView(rowTextView);
 
-                    // save a reference to the textview for later
+                    // save a reference to the text view for later
                     myTextViews[i] = rowTextView;
                 }
             }

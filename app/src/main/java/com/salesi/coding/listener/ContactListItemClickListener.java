@@ -8,13 +8,13 @@ import android.view.View;
 
 
 public class ContactListItemClickListener implements RecyclerView.OnItemTouchListener {
-    private OnItemClickListener mListener;
+    private final OnItemClickListener mListener;
 
     public interface OnItemClickListener {
         void onItemClick(View view, int position);
     }
 
-    GestureDetector mGestureDetector;
+    private final GestureDetector mGestureDetector;
 
     public ContactListItemClickListener(Context context, OnItemClickListener listener) {
         mListener = listener;
