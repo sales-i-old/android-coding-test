@@ -8,6 +8,7 @@ import com.salesi.coding.MainApp;
 import com.salesi.coding.mapper.adapter.ContactsAPI;
 import com.salesi.coding.service.IContactService;
 import com.salesi.coding.ui.screens.FContacts;
+import com.salesi.coding.ui.screens.FContactsDetails;
 
 import javax.inject.Singleton;
 
@@ -21,7 +22,7 @@ public interface ApplicationComponent {
     void inject(MainApp app);
     void inject(MainActivity activity);
     void inject(FContacts contacts);
-
+    void inject(FContactsDetails contactsDetails);
     @ApplicationContext Context context();
 
     Gson gson();
