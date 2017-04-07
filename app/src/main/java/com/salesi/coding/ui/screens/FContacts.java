@@ -1,9 +1,12 @@
 package com.salesi.coding.ui.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,10 +14,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
+import com.salesi.coding.common.Constants;
 import com.salesi.coding.entity.ContactEntity;
+import com.salesi.coding.listener.ContactListItemClickListener;
 import com.salesi.coding.service.IContactService;
 import com.salesi.coding.ui.adapter.ContactsAdapter;
 
@@ -29,13 +35,13 @@ import dagger.Lazy;
 /**
  * Fragment matching first tab
  *
- * Copyright © 2017 sales­i
+ * Copyright Â© 2017 salesÂ­i
  */
 
 public class FContacts extends Fragment {
     @Inject protected Lazy<IContactService> mContactService;
     @Inject protected Lazy<ContactsAdapter> mAdapter;
-
+    Navigate navigate;
     @Bind(R.id.list_contacts) protected RecyclerView mRecycler;
 
     public static FContacts instance() {
@@ -54,13 +60,13 @@ public class FContacts extends Fragment {
         ButterKnife.bind(this, view);
 
         StrictMode.ThreadPolicy strictPolicy = new StrictMode.ThreadPolicy.Builder()
-                                                             .permitAll().build();
+                .permitAll().build();
         StrictMode.setThreadPolicy(strictPolicy);
 
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                List<ContactEntity> contacts = mContactService.get().fetchContacts();
+                final List<ContactEntity> contacts = mContactService.get().fetchContacts();
 
                 mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
@@ -68,6 +74,19 @@ public class FContacts extends Fragment {
 
                 mAdapter.get().setData(contacts);
                 mRecycler.setAdapter(mAdapter.get());
+                mRecycler.addOnItemTouchListener(
+                        new ContactListItemClickListener(getContext(), new ContactListItemClickListener.OnItemClickListener() {
+                            @Override public void onItemClick(View view, int position) {
+                                // TODO Handle item click
+                                Intent contactDetailsIntent = new Intent(getContext(), FContactDetailsActivity.class);
+                                contactDetailsIntent.putExtra(Constants.KEY_CONTACT_DETAILS, contacts.get(position));
+                                startActivity(contactDetailsIntent);
+
+                            }
+                        })
+                );
+
+
             }
         });
 
@@ -78,5 +97,10 @@ public class FContacts extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    public interface Navigate
+    {
+        void click();
     }
 }

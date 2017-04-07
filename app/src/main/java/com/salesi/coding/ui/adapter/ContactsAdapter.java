@@ -16,7 +16,6 @@ import android.widget.TextView;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
 import com.salesi.coding.ui.screens.FContactsDetails;
-import com.salesi.coding.listeners.ContactListItemClickListener;
 
 import java.util.List;
 
