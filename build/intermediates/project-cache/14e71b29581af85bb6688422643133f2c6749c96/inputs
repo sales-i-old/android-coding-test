@@ -1,0 +1,6 @@
+COMMAND=PREDEX_LIBRARY_TO_DEX_ARCHIVE
+FILE_PATH=C:\Users\imrooniel\Desktop\projects\tet\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar
+FILE_HASH=a0380821546f3e1b9e56762ad871e8168a2ecbcc
+DX_VERSION=1.13
+JUMBO_MODE=true
+OPTIMIZE=true
