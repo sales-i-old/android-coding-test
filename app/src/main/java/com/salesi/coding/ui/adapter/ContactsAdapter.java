@@ -76,7 +76,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             phone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("debug", contactData.FirstNane + " " + contactData.LastName + " phone");
                     Intent phoneIntent = new Intent(android.content.Intent.ACTION_DIAL);
                     phoneIntent.setData(Uri.parse("tel:"+contactData.PhoneNumber));
                     v.getContext().startActivity(Intent.createChooser(phoneIntent, "Call..."));
@@ -96,6 +95,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Override
         public void onClick(View v) {
             Log.d("debug", contactData.FirstNane + " " + contactData.LastName);
+            Intent intent = new Intent(v.getContext(), com.salesi.coding.DisplayContactDetails.class);
+            intent.putExtra("contactId", contactData.ContactID);
+            v.getContext().startActivity(intent);
         }
     }
 }
