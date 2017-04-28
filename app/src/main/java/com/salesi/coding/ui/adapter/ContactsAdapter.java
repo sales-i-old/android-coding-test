@@ -1,7 +1,10 @@
 package com.salesi.coding.ui.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.TextView;
 
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
+import com.salesi.coding.ui.screens.ContactDetailActivity;
 
 import java.util.List;
 
@@ -25,6 +29,12 @@ import butterknife.ButterKnife;
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
 
+    private static final String TAG = "ContactsAdapter";
+
+    ContactDetailActivity contactDetailActivity;
+
+    private Context context;
+
     @Inject
     public ContactsAdapter() {}
 
@@ -40,8 +50,24 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.bind(mContacts.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Log.i(TAG, "Contact entity clicked");
+
+                // show that id's detail in new Activity
+                // (also could be Fragment or DialogFragment using FragmentManager)
+                Intent intent = new Intent(context, ContactDetailActivity.class);
+                intent.putExtra("contact_contactID", mContacts.get(position).ContactID);
+                intent.putExtra("contact_first_name", mContacts.get(position).FirstName);
+                intent.putExtra("contact_last_name", mContacts.get(position).LastName);
+                context.startActivity(intent);
+                //TODO layout for this
+            }
+        });
     }
 
     @Override
@@ -56,6 +82,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            context = itemView.getContext();
         }
 
         public void bind(ContactEntity entity) {
