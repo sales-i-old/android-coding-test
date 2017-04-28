@@ -2,4 +2,8 @@
     <string name="app_name">CodingTest</string>
     <string name="base_url">http://www.mocky.io/</string>
     <string name="title_tab_question_1">Contacts</string>
+    <string name="exit_app">Exit app</string>
+    <string name="want_to_exit">Do you want to exit app?</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
 </resources>
