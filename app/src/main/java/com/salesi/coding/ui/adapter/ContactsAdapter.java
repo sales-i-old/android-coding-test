@@ -42,6 +42,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bind(mContacts.get(position));
+
     }
 
     @Override
@@ -59,8 +60,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         }
 
         public void bind(ContactEntity entity) {
-            mId.setText("" +entity.ContactID);
-            mName.setText(entity.FirstName+" "+entity.LastName);
+            mId.setText("" +entity.contactID);
+            mName.setText(entity.firstNane+" "+entity.lastName);
         }
     }
 }
