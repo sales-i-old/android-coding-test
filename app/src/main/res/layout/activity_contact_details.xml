@@ -307,7 +307,8 @@
         </LinearLayout>
         
         <ListView
-            android:layout_width=""
-            android:layout_height=""></ListView>
+            android:id="@+id/connectedContacts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 </layout>
