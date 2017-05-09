@@ -1,6 +1,7 @@
 package com.salesi.coding.ui.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
 import com.salesi.coding.service.IContactService;
 import com.salesi.coding.ui.adapter.ContactsAdapter;
+import com.salesi.coding.ui.adapter.ItemClickSupport;
 
 import java.util.List;
 
@@ -28,15 +30,18 @@ import dagger.Lazy;
 
 /**
  * Fragment matching first tab
- *
+ * <p>
  * Copyright © 2017 sales­i
  */
 
 public class FContacts extends Fragment {
-    @Inject protected Lazy<IContactService> mContactService;
-    @Inject protected Lazy<ContactsAdapter> mAdapter;
+    @Inject
+    protected Lazy<IContactService> mContactService;
+    @Inject
+    protected Lazy<ContactsAdapter> mAdapter;
 
-    @Bind(R.id.list_contacts) protected RecyclerView mRecycler;
+    @Bind(R.id.list_contacts)
+    protected RecyclerView mRecycler;
 
     public static FContacts instance() {
         return new FContacts();
@@ -54,13 +59,13 @@ public class FContacts extends Fragment {
         ButterKnife.bind(this, view);
 
         StrictMode.ThreadPolicy strictPolicy = new StrictMode.ThreadPolicy.Builder()
-                                                             .permitAll().build();
+                .permitAll().build();
         StrictMode.setThreadPolicy(strictPolicy);
 
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                List<ContactEntity> contacts = mContactService.get().fetchContacts();
+                final List<ContactEntity> contacts = mContactService.get().fetchContacts();
 
                 mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
@@ -68,6 +73,15 @@ public class FContacts extends Fragment {
 
                 mAdapter.get().setData(contacts);
                 mRecycler.setAdapter(mAdapter.get());
+                ItemClickSupport.addTo(mRecycler).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                        Intent contactDetailsIntent = new Intent(getActivity(), ContactDetailsActivity.class);
+                        contactDetailsIntent.putExtra(getString(R.string.contact_key), contacts.get(position));
+                        getActivity().startActivity(contactDetailsIntent);
+                    }
+                });
             }
         });
 
