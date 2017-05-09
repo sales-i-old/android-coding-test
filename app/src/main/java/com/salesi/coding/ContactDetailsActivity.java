@@ -2,8 +2,8 @@ package com.salesi.coding;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.salesi.coding.entity.ContactAddressEntity;
@@ -16,8 +16,6 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class ContactDetailsActivity extends AppCompatActivity {
-    @Bind(R.id.toolbar)
-    protected Toolbar mToolbar;
 
     @Bind(R.id.contact_id)
     protected TextView mContactIdView;
@@ -47,8 +45,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ContactEntity contactEntity = (ContactEntity) getIntent().getSerializableExtra(Constants.Serializables.CONTACT_ENTITY);
 
@@ -91,5 +88,16 @@ public class ContactDetailsActivity extends AppCompatActivity {
             return Arrays.toString(contactHobbies.toArray());
         }
         return "";
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                finish();
+            default:
+        }
+        return true;
     }
 }
