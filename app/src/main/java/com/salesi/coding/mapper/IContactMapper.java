@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Mapper layer functionality definitions
- *
+ * <p>
  * Copyright © 2017 sales­i
  */
 public interface IContactMapper {

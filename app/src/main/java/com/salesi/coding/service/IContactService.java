@@ -6,9 +6,12 @@ import java.util.List;
 
 /**
  * Service layer functionality definitions
- *
+ * <p>
  * Copyright © 2017 sales­i
  */
 public interface IContactService {
+
     List<ContactEntity> fetchContacts();
+
+    List<ContactEntity> fetchContactsWithSharedHobby(ContactEntity contactToMatch);
 }

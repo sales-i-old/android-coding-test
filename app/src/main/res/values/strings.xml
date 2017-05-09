@@ -2,4 +2,30 @@
     <string name="app_name">CodingTest</string>
     <string name="base_url">http://www.mocky.io/</string>
     <string name="title_tab_question_1">Contacts</string>
+
+    <string name="contact_details_title">Contact details</string>
+
+    <string name="contact_id_label">Contact ID:</string>
+    <string name="title_label">Title:</string>
+    <string name="first_name_label">First Name:</string>
+    <string name="last_name_label">Last Name:</string>
+    <string name="job_title_label">Job Title:</string>
+    <string name="phone_number_label">Phone Number:</string>
+    <string name="email_label">Email:</string>
+    <string name="address_1_label">Address 1:</string>
+    <string name="address_2_label">Address 2:</string>
+    <string name="address_3_label">Address 3:</string>
+    <string name="address_4_label">Address 4:</string>
+    <string name="town_label">Town:</string>
+    <string name="county_label">County:</string>
+    <string name="postcode_label">Postcode:</string>
+    <string name="country_label">Country:</string>
+    <string name="hobbies_label">Hobbies:</string>
+    <string name="contacts_with_shared_hobby">CONTACTS WITH ANY SHARED HOBBY</string>
+    <string name="contact_phone_call_missing_permission">"You must grant phone calls permission!"</string>
+    <string name="contact_send_email">Send email…</string>
+
+    <string name="menu_exit_title">Exit</string>
+
+    <string name="contact_key">contact</string>
 </resources>
