@@ -33,10 +33,14 @@ import dagger.Lazy;
  */
 
 public class FContacts extends Fragment {
-    @Inject protected Lazy<IContactService> mContactService;
-    @Inject protected Lazy<ContactsAdapter> mAdapter;
+    @Inject
+    protected Lazy<IContactService> service;
 
-    @Bind(R.id.list_contacts) protected RecyclerView mRecycler;
+    @Inject
+    protected Lazy<ContactsAdapter> adapter;
+
+    @Bind(R.id.list_contacts)
+    protected RecyclerView recyclerView;
 
     public static FContacts instance() {
         return new FContacts();
@@ -60,14 +64,14 @@ public class FContacts extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                List<ContactEntity> contacts = mContactService.get().fetchContacts();
+                List<ContactEntity> contacts = service.get().fetchContacts();
 
-                mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-                mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-                mRecycler.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-                mAdapter.get().setData(contacts);
-                mRecycler.setAdapter(mAdapter.get());
+                adapter.get().setData(contacts);
+                recyclerView.setAdapter(adapter.get());
             }
         });
 

@@ -14,11 +14,11 @@ import com.salesi.coding.ui.screens.FContacts;
  */
 
 public class TabsAdapter extends FragmentStatePagerAdapter {
-    private final Context mContext;
+    private final Context context;
 
     public TabsAdapter(final FragmentManager fm, final Context context) {
         super(fm);
-        mContext = context;
+        this.context = context;
     }
 
     @Override
@@ -27,15 +27,17 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
             case 0 : {
                 return FContacts.instance();
             }
+            default : {
+                return null;
+            }
         }
-        return null;
     }
 
     @Override
     public CharSequence getPageTitle(int position) {
         switch(position) {
             case 0 : {
-                return mContext.getString(R.string.title_tab_question_1);
+                return context.getString(R.string.title_tab_question_1);
             }
         }
         return null;
@@ -43,6 +45,6 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return mContext.getResources().getInteger(R.integer.total_tab_count);
+        return context.getResources().getInteger(R.integer.total_tab_count);
     }
 }

@@ -12,14 +12,14 @@ import java.util.List;
  */
 
 public class ContactServiceImpl implements IContactService {
-    private final IContactMapper mMapper;
+    private final IContactMapper mapper;
 
     public ContactServiceImpl(IContactMapper mapper) {
-        mMapper = mapper;
+        this.mapper = mapper;
     }
 
     @Override
     public List<ContactEntity> fetchContacts() {
-        return mMapper.fetchContacts();
+        return mapper.fetchContacts();
     }
 }

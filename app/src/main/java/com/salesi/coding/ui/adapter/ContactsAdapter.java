@@ -23,13 +23,13 @@ import butterknife.ButterKnife;
  * Copyright © 2017 sales­i
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
-    private List<ContactEntity> mContacts;
+    private List<ContactEntity> contacts;
 
     @Inject
     public ContactsAdapter() {}
 
     public void setData(List<ContactEntity> contacts) {
-        mContacts = contacts;
+        this.contacts = contacts;
     }
 
     @Override
@@ -41,17 +41,22 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(mContacts.get(position));
+        holder.bind(contacts.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mContacts.size();
+        return contacts.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @Nullable @Bind(R.id.contact_id) protected TextView mId;
-        @Nullable @Bind(R.id.contact_name) protected TextView mName;
+        @Nullable
+        @Bind(R.id.contact_id)
+        protected TextView mId;
+
+        @Nullable
+        @Bind(R.id.contact_name)
+        protected TextView mName;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -59,8 +64,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         }
 
         public void bind(ContactEntity entity) {
-            mId.setText(entity.ContactID);
-            mName.setText(entity.FirstName+" "+entity.LastName);
+            mId.setText(entity.getContactID());
+            mName.setText(entity.getFirstName() +" "+ entity.getLastName());
         }
     }
 }
