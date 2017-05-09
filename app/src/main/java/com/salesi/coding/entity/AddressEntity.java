@@ -3,7 +3,9 @@ package com.salesi.coding.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class AddressEntity {
+import java.io.Serializable;
+
+public class AddressEntity implements Serializable{
 
     @SerializedName("Address1")
     @Expose

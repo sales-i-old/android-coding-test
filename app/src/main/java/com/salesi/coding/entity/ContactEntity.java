@@ -3,6 +3,7 @@ package com.salesi.coding.entity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ import java.util.List;
  * Copyright © 2017 sales­i
  */
 
-public class ContactEntity {
+public class ContactEntity implements Serializable{
     @SerializedName("ContactID")
     @Expose
     public Integer contactID;
