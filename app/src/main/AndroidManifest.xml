@@ -27,7 +27,5 @@
             android:name=".DetailsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-
     </application>
-
 </manifest>

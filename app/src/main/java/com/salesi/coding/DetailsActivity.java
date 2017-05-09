@@ -7,6 +7,9 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.salesi.coding.entity.AddressEntity;
@@ -39,6 +42,8 @@ public class DetailsActivity extends AppCompatActivity {
     @Bind(R.id.similarContacts)
     protected RecyclerView similarContacts;
 
+    @Bind(R.id.toolbar) protected Toolbar mToolbar;
+
     public static Intent getInstance(Context context, ContactEntity contactEntity, List<ContactEntity> data) {
         Intent intent = new Intent(context, DetailsActivity.class);
         intent.putExtra(CONTACT_DATA_KEY, contactEntity);
@@ -55,6 +60,8 @@ public class DetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details);
 
         ButterKnife.bind(this);
+
+        setSupportActionBar(mToolbar);
 
         final ContactEntity data = (ContactEntity) getIntent().getSerializableExtra(CONTACT_DATA_KEY);
 
@@ -131,5 +138,21 @@ public class DetailsActivity extends AppCompatActivity {
             viewHobbies.setText("Hobbies: " + hobbies);
         }
         return false;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_default, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.closeApp){
+            finish();
+            System.exit(0);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
