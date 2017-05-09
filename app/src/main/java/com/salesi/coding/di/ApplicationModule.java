@@ -25,7 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Dependency Injection module
- *
+ * <p>
  * Copyright © 2017 sales­i
  */
 @Module
@@ -47,7 +47,7 @@ public class ApplicationModule {
     Gson providesGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.serializeNulls()
-               .excludeFieldsWithoutExposeAnnotation();
+                .excludeFieldsWithoutExposeAnnotation();
         return builder.create();
     }
 
@@ -55,8 +55,8 @@ public class ApplicationModule {
     @Provides
     OkHttpClient providesClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                                                        .connectTimeout(30, TimeUnit.SECONDS)
-                                                        .readTimeout(30, TimeUnit.SECONDS);
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS);
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.addInterceptor(loggingInterceptor);
@@ -67,10 +67,10 @@ public class ApplicationModule {
     @Provides
     Retrofit providesRetrofit(Gson gson, OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
-                                        .addConverterFactory(GsonConverterFactory.create(gson))
-                                        .client(client)
-                                        .baseUrl(mApplication.getString(R.string.base_url))
-                                        .build();
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(client)
+                .baseUrl(mApplication.getString(R.string.base_url))
+                .build();
         return retrofit;
     }
 

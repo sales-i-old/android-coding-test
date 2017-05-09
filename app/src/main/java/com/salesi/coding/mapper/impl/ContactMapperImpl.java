@@ -13,7 +13,7 @@ import retrofit2.Response;
 
 /**
  * Mapper layer implementations
- *
+ * <p>
  * Copyright © 2017 sales­i
  */
 public class ContactMapperImpl implements IContactMapper {

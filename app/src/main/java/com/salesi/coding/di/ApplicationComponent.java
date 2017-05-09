@@ -19,17 +19,25 @@ import retrofit2.Retrofit;
 @Singleton
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
+
     void inject(MainApp app);
+
     void inject(MainActivity activity);
+
     void inject(FContacts contacts);
+
     void inject(ContactDetailsActivity activity);
 
-    @ApplicationContext Context context();
+    @ApplicationContext
+    Context context();
 
     Gson gson();
+
     OkHttpClient client();
+
     Retrofit retrofit();
 
     ContactsAPI contactsAPI();
+
     IContactService contactService();
 }
