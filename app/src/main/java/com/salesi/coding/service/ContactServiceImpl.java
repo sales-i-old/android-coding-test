@@ -27,13 +27,14 @@ public class ContactServiceImpl implements IContactService {
         return mMapper.fetchContacts();
     }
 
-    /* Case insensitive matching */
+    /* Case sensitive matching */
     @Override
     public List<ContactEntity> fetchContactsWithSharedHobby(ContactEntity contactToMatch) {
         List<ContactEntity> allContacts = mMapper.fetchContacts();
         List<ContactEntity> sharedContacts = new ArrayList<>();
 
         for (ContactEntity contact : allContacts) {
+            /* Assumed that ContactID should be unique */
             if (contactToMatch.Hobbies != null && contact.Hobbies != null && !contact.ContactID.equals(contactToMatch.ContactID)) {
                 for (String hobbyToMatch : contactToMatch.Hobbies) {
                     if (!TextUtils.isEmpty(hobbyToMatch) && contact.Hobbies.contains(hobbyToMatch)) {
