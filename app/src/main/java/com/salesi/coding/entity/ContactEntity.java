@@ -28,15 +28,15 @@ public class ContactEntity implements Parcelable {
 
     @SerializedName("JobTitle")
     @Expose
-    private Integer jobTitle;
+    private String jobTitle;
 
     @SerializedName("PhoneNumber")
     @Expose
-    private Integer phoneNumber;
+    private String phoneNumber;
 
     @SerializedName("Email")
     @Expose
-    private Integer email;
+    private String email;
 
     @SerializedName("Address")
     @Expose
@@ -46,23 +46,23 @@ public class ContactEntity implements Parcelable {
     @Expose
     private List<String> hobbies = new ArrayList<>();
 
-    public Integer getJobTitle() {
+    public String getJobTitle() {
         return jobTitle;
     }
 
-    public void setJobTitle(final Integer jobTitle) {
+    public void setJobTitle(final String jobTitle) {
         this.jobTitle = jobTitle;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(final Integer phoneNumber) {
+    public void setPhoneNumber(final String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public Integer getEmail() {
+    public String getEmail() {
         return email;
     }
 
@@ -130,7 +130,7 @@ public class ContactEntity implements Parcelable {
         address.setCountry(country);
     }
 
-    public void setEmail(final Integer email) {
+    public void setEmail(final String email) {
         this.email = email;
     }
 
@@ -191,9 +191,9 @@ public class ContactEntity implements Parcelable {
         title = in.readString();
         firstName = in.readString();
         lastName = in.readString();
-        jobTitle = in.readByte() == 0x00 ? null : in.readInt();
-        phoneNumber = in.readByte() == 0x00 ? null : in.readInt();
-        email = in.readByte() == 0x00 ? null : in.readInt();
+        jobTitle = in.readString();
+        phoneNumber = in.readString();
+        email = in.readString();
         address = (Address) in.readValue(Address.class.getClassLoader());
         if (in.readByte() == 0x01) {
             hobbies = new ArrayList<String>();
@@ -223,19 +223,19 @@ public class ContactEntity implements Parcelable {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeInt(jobTitle);
+            dest.writeString(jobTitle);
         }
         if (phoneNumber == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeInt(phoneNumber);
+            dest.writeString(phoneNumber);
         }
         if (email == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeInt(email);
+            dest.writeString(email);
         }
         dest.writeValue(address);
         if (hobbies == null) {

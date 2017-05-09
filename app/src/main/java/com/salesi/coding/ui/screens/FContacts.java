@@ -2,6 +2,7 @@ package com.salesi.coding.ui.screens;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -93,7 +94,19 @@ public class FContacts extends Fragment {
                 contactsAdapter.getOnCallIconClickClicks().subscribe(new Action1<ContactEntity>() {
                     @Override
                     public void call(final ContactEntity contactEntity) {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + contactEntity.getPhoneNumber()));
+                        startActivity(intent);
+                    }
+                });
 
+                contactsAdapter.getOnEmailIconClicks().subscribe(new Action1<ContactEntity>() {
+                    @Override
+                    public void call(final ContactEntity contactEntity) {
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                "mailto",contactEntity.getEmail(), null));
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                        startActivity(Intent.createChooser(emailIntent, "Send email..."));
                     }
                 });
                 recyclerView.setAdapter(contactsAdapter);
