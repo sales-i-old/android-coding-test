@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.salesi.coding">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".MainApp"
         android:allowBackup="true"
@@ -19,5 +20,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

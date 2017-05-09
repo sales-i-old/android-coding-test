@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 public class ContactEntity {
-    @SerializedName("contactID")
+    @SerializedName("ContactID")
     @Expose
     private Integer contactID;
 
@@ -21,11 +21,11 @@ public class ContactEntity {
     @Expose
     private String title;
 
-    @SerializedName("firstName")
+    @SerializedName("FirstNane")
     @Expose
     private String firstName;
 
-    @SerializedName("lastName")
+    @SerializedName("LastName")
     @Expose
     private String lastName;
 
