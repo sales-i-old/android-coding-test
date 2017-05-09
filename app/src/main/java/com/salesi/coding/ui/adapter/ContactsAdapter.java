@@ -1,12 +1,22 @@
 package com.salesi.coding.ui.adapter;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.salesi.coding.Constants;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
 
@@ -60,14 +70,32 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Bind(R.id.contact_name)
         protected TextView mName;
 
+        @Nullable
+        @Bind(R.id.phone)
+        protected ImageView mPhone;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(ContactEntity entity) {
+        public void bind(final ContactEntity entity) {
             mId.setText(String.valueOf(entity.ContactID));
             mName.setText(entity.FirstName + " " + entity.LastName);
+
+            mPhone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + entity.PhoneNumber));
+                    int permissionCheck = ContextCompat.checkSelfPermission(v.getContext(), Manifest.permission.CALL_PHONE);
+                    if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+                        v.getContext().startActivity(intent);
+                    } else {
+                        Toast.makeText(v.getContext(), R.string.contact_phone_call_missing_permission, Toast.LENGTH_LONG).show();
+                        ActivityCompat.requestPermissions((Activity) v.getContext(), new String[]{Manifest.permission.CALL_PHONE}, Constants.PHONE_CALL_PERMISSION_REQUEST_CODE);
+                    }
+                }
+            });
         }
     }
 }

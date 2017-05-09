@@ -21,8 +21,8 @@
     <string name="postcode_label">Postcode:</string>
     <string name="country_label">Country:</string>
     <string name="hobbies_label">Hobbies:</string>
-
     <string name="contacts_with_shared_hobby">CONTACTS WITH ANY SHARED HOBBY</string>
+    <string name="contact_phone_call_missing_permission">"You must grant phone calls permission!"</string>
 
     <string name="contact_key">contact</string>
 </resources>
