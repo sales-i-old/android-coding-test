@@ -72,6 +72,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
         @Nullable @Bind(R.id.phone) protected ImageView mPhone;
+        @Nullable @Bind(R.id.email) protected ImageView mEmail;
 
         private ContactEntity contactEntity;
 
@@ -80,6 +81,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             Intent intent = new Intent(android.content.Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:" + contactEntity.PhoneNumber));
             view.getContext().startActivity(Intent.createChooser(intent, "Call phone number"));
+        }
+
+        @OnClick(R.id.email)
+        void sendEmail(View view) {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text");
+            intent.putExtra(Intent.EXTRA_EMAIL, contactEntity.Email);
+            view.getContext().startActivity(Intent.createChooser(intent, "Send email"));
         }
 
         public ViewHolder(View itemView) {
