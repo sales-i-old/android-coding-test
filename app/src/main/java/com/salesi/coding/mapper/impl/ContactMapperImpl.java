@@ -17,15 +17,15 @@ import retrofit2.Response;
  * Copyright © 2017 sales­i
  */
 public class ContactMapperImpl implements IContactMapper {
-    private final ContactsAPI mContactsAPI;
+    private final ContactsAPI contactsAPI;
 
     public ContactMapperImpl(ContactsAPI contactsAPI) {
-        mContactsAPI = contactsAPI;
+        this.contactsAPI = contactsAPI;
     }
 
     @Override
     public List<ContactEntity> fetchContacts() {
-        Call<List<ContactEntity>> call = mContactsAPI.fetchContacts();
+        Call<List<ContactEntity>> call = contactsAPI.fetchContacts();
         try {
             Response<List<ContactEntity>> response = call.execute();
             return response.body();

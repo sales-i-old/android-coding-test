@@ -30,16 +30,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 @Module
 public class ApplicationModule {
-    private final MainApp mApplication;
+    private final MainApp app;
 
     public ApplicationModule(MainApp application) {
-        mApplication = application;
+        app = application;
     }
 
     @Provides
     @ApplicationContext
-    Context provideContext() {
-        return mApplication;
+    Context providesContext() {
+        return app;
     }
 
     @Singleton
@@ -47,7 +47,7 @@ public class ApplicationModule {
     Gson providesGson() {
         GsonBuilder builder = new GsonBuilder();
         builder.serializeNulls()
-               .excludeFieldsWithoutExposeAnnotation();
+                .excludeFieldsWithoutExposeAnnotation();
         return builder.create();
     }
 
@@ -69,7 +69,7 @@ public class ApplicationModule {
         Retrofit retrofit = new Retrofit.Builder()
                                         .addConverterFactory(GsonConverterFactory.create(gson))
                                         .client(client)
-                                        .baseUrl(mApplication.getString(R.string.base_url))
+                                        .baseUrl(app.getString(R.string.base_url))
                                         .build();
         return retrofit;
     }

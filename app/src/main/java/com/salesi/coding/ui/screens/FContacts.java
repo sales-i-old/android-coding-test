@@ -1,9 +1,12 @@
 package com.salesi.coding.ui.screens;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.salesi.coding.ContactDetailsActivity;
 import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
@@ -25,6 +29,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dagger.Lazy;
+import rx.functions.Action1;
 
 /**
  * Fragment matching first tab
@@ -33,10 +38,14 @@ import dagger.Lazy;
  */
 
 public class FContacts extends Fragment {
-    @Inject protected Lazy<IContactService> mContactService;
-    @Inject protected Lazy<ContactsAdapter> mAdapter;
+    @Inject
+    protected Lazy<IContactService> service;
 
-    @Bind(R.id.list_contacts) protected RecyclerView mRecycler;
+    @Inject
+    protected Lazy<ContactsAdapter> adapter;
+
+    @Bind(R.id.list_contacts)
+    protected RecyclerView recyclerView;
 
     public static FContacts instance() {
         return new FContacts();
@@ -60,14 +69,47 @@ public class FContacts extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                List<ContactEntity> contacts = mContactService.get().fetchContacts();
+                List<ContactEntity> contacts = service.get().fetchContacts();
 
-                mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-                mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-                mRecycler.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-                mAdapter.get().setData(contacts);
-                mRecycler.setAdapter(mAdapter.get());
+                final ContactsAdapter contactsAdapter = adapter.get();
+                contactsAdapter.setData(contacts);
+                contactsAdapter.getPositionClicks().subscribe(new Action1<ContactEntity>() {
+                    @Override
+                    public void call(final ContactEntity contactEntity) {
+                        final FragmentActivity activity = FContacts.instance().getActivity();
+                        Intent intent = new Intent(activity,
+                                ContactDetailsActivity.class);
+                        final Bundle instanceBundle =
+                                ContactDetailsActivity.createInstanceBundle(contactEntity);
+                        intent.putExtra(ContactDetailsActivity.CONTACT_DETAILS_BUNDLE_ID,
+                                instanceBundle);
+                        startActivity(intent);
+                    }
+                });
+
+                contactsAdapter.getOnCallIconClickClicks().subscribe(new Action1<ContactEntity>() {
+                    @Override
+                    public void call(final ContactEntity contactEntity) {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + contactEntity.getPhoneNumber()));
+                        startActivity(intent);
+                    }
+                });
+
+                contactsAdapter.getOnEmailIconClicks().subscribe(new Action1<ContactEntity>() {
+                    @Override
+                    public void call(final ContactEntity contactEntity) {
+                        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                                "mailto",contactEntity.getEmail(), null));
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                        startActivity(Intent.createChooser(emailIntent, "Send email..."));
+                    }
+                });
+                recyclerView.setAdapter(contactsAdapter);
             }
         });
 

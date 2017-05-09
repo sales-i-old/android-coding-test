@@ -15,24 +15,28 @@ import javax.inject.Inject;
  * Copyright © 2017 sales­i
  */
 public class MainApp extends Application {
-    @Inject @ApplicationContext protected Context mApp;
+    @Inject
+    @ApplicationContext
+    protected Context appContext;
 
-    private ApplicationComponent mApplicationComponent;
+    private ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        if(null == mApplicationComponent) mApplicationComponent = getComponent();
-        mApplicationComponent.inject(this);
+        if(null == applicationComponent) {
+            applicationComponent = getComponent();
+        }
+        applicationComponent.inject(this);
     }
 
     public ApplicationComponent getComponent() {
-        if(null == mApplicationComponent) {
-            mApplicationComponent = DaggerApplicationComponent.builder()
+        if(null == applicationComponent) {
+            applicationComponent = DaggerApplicationComponent.builder()
                     .applicationModule(new ApplicationModule(this))
                     .build();
         }
-        return mApplicationComponent;
+        return applicationComponent;
     }
 }
