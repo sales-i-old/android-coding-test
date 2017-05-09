@@ -30,4 +30,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
+
+
 }

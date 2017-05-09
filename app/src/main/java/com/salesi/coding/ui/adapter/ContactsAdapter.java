@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
+import com.salesi.coding.listener.OnContactItemClickedListener;
 
 import java.util.List;
 
@@ -24,6 +25,7 @@ import butterknife.ButterKnife;
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
+    private OnContactItemClickedListener onContactItemClickedListener;
 
     @Inject
     public ContactsAdapter() {}
@@ -41,7 +43,20 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(mContacts.get(position));
+        final ContactEntity contactEntity = mContacts.get(position);
+        holder.bind(contactEntity);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onContactItemClickedListener != null) {
+                    onContactItemClickedListener.onItemClicked(contactEntity);
+                }
+            }
+        });
+    }
+
+    public void setOnItemClickListener(OnContactItemClickedListener onItemClickListener) {
+        onContactItemClickedListener = onItemClickListener;
     }
 
     @Override
