@@ -23,6 +23,7 @@
     <string name="hobbies_label">Hobbies:</string>
     <string name="contacts_with_shared_hobby">CONTACTS WITH ANY SHARED HOBBY</string>
     <string name="contact_phone_call_missing_permission">"You must grant phone calls permission!"</string>
+    <string name="contact_send_email">Send email…</string>
 
     <string name="contact_key">contact</string>
 </resources>

@@ -74,6 +74,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Bind(R.id.phone)
         protected ImageView mPhone;
 
+        @Nullable
+        @Bind(R.id.email)
+        protected ImageView mEmail;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -94,6 +98,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                         Toast.makeText(v.getContext(), R.string.contact_phone_call_missing_permission, Toast.LENGTH_LONG).show();
                         ActivityCompat.requestPermissions((Activity) v.getContext(), new String[]{Manifest.permission.CALL_PHONE}, Constants.PHONE_CALL_PERMISSION_REQUEST_CODE);
                     }
+                }
+            });
+
+            mEmail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", entity.Email, null));
+                    v.getContext().startActivity(Intent.createChooser(emailIntent, v.getContext().getString(R.string.contact_send_email)));
                 }
             });
         }
