@@ -1,6 +1,7 @@
 package com.salesi.coding.ui.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -12,9 +13,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.salesi.coding.Constants;
+import com.salesi.coding.ContactDetailsActivity;
 import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
+import com.salesi.coding.listener.OnContactItemClickedListener;
 import com.salesi.coding.service.IContactService;
 import com.salesi.coding.ui.adapter.ContactsAdapter;
 
@@ -32,7 +36,7 @@ import dagger.Lazy;
  * Copyright © 2017 sales­i
  */
 
-public class FContacts extends Fragment {
+public class FContacts extends Fragment implements OnContactItemClickedListener {
     @Inject protected Lazy<IContactService> mContactService;
     @Inject protected Lazy<ContactsAdapter> mAdapter;
 
@@ -67,11 +71,20 @@ public class FContacts extends Fragment {
                 mRecycler.setItemAnimator(new DefaultItemAnimator());
 
                 mAdapter.get().setData(contacts);
+                mAdapter.get().setOnItemClickListener(FContacts.this);
+
                 mRecycler.setAdapter(mAdapter.get());
             }
         });
 
         return view;
+    }
+
+    @Override
+    public void onItemClicked(ContactEntity contact) {
+        Intent contactDetailsIntent = new Intent(getContext(), ContactDetailsActivity.class);
+        contactDetailsIntent.putExtra(Constants.Serializables.CONTACT_ENTITY, contact);
+        startActivity(contactDetailsIntent);
     }
 
     @Override

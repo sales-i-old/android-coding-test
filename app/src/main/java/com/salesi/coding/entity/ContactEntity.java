@@ -1,8 +1,10 @@
 package com.salesi.coding.entity;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Contact Entity
@@ -11,9 +13,14 @@ import java.util.List;
  * Copyright © 2017 sales­i
  */
 
-public class ContactEntity {
+public class ContactEntity implements Serializable {
     @Expose public Integer ContactID;
     @Expose public String Title;
-    @Expose public String FirstName;
+    @SerializedName("FirstNane") @Expose public String FirstName;
     @Expose public String LastName;
+    @Expose public String JobTitle;
+    @Expose public String PhoneNumber;
+    @Expose public String Email;
+    @Expose public ContactAddressEntity Address;
+    @Expose public ArrayList<String> Hobbies;
 }
