@@ -1,9 +1,11 @@
 package com.salesi.coding.ui.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.salesi.coding.ContactDetailsActivity;
 import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
@@ -25,6 +28,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dagger.Lazy;
+import rx.functions.Action1;
 
 /**
  * Fragment matching first tab
@@ -70,8 +74,29 @@ public class FContacts extends Fragment {
                 recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
                 recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-                adapter.get().setData(contacts);
-                recyclerView.setAdapter(adapter.get());
+                final ContactsAdapter contactsAdapter = adapter.get();
+                contactsAdapter.setData(contacts);
+                contactsAdapter.getPositionClicks().subscribe(new Action1<ContactEntity>() {
+                    @Override
+                    public void call(final ContactEntity contactEntity) {
+                        final FragmentActivity activity = FContacts.instance().getActivity();
+                        Intent intent = new Intent(activity,
+                                ContactDetailsActivity.class);
+                        final Bundle instanceBundle =
+                                ContactDetailsActivity.createInstanceBundle(contactEntity);
+                        intent.putExtra(ContactDetailsActivity.CONTACT_DETAILS_BUNDLE_ID,
+                                instanceBundle);
+                        startActivity(intent);
+                    }
+                });
+
+                contactsAdapter.getOnCallIconClickClicks().subscribe(new Action1<ContactEntity>() {
+                    @Override
+                    public void call(final ContactEntity contactEntity) {
+
+                    }
+                });
+                recyclerView.setAdapter(contactsAdapter);
             }
         });
 
