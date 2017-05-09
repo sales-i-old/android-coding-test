@@ -19,14 +19,15 @@ import butterknife.ButterKnife;
 
 /**
  * Contacts view adapter
- *
+ * <p>
  * Copyright © 2017 sales­i
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
 
     @Inject
-    public ContactsAdapter() {}
+    public ContactsAdapter() {
+    }
 
     public void setData(List<ContactEntity> contacts) {
         mContacts = contacts;
@@ -35,7 +36,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                                  .inflate(R.layout.layout_contact_row_item, parent,  false);
+                .inflate(R.layout.layout_contact_row_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -50,8 +51,14 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @Nullable @Bind(R.id.contact_id) protected TextView mId;
-        @Nullable @Bind(R.id.contact_name) protected TextView mName;
+
+        @Nullable
+        @Bind(R.id.contact_id)
+        protected TextView mId;
+
+        @Nullable
+        @Bind(R.id.contact_name)
+        protected TextView mName;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -59,8 +66,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         }
 
         public void bind(ContactEntity entity) {
-            mId.setText(entity.ContactID);
-            mName.setText(entity.FirstName+" "+entity.LastName);
+            mId.setText(String.valueOf(entity.ContactID));
+            mName.setText(entity.FirstName + " " + entity.LastName);
         }
     }
 }
