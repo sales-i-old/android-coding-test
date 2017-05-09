@@ -6,30 +6,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.salesi.coding.DetailsActivity;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
  * Contacts view adapter
- *
+ * <p>
  * Copyright © 2017 sales­i
  */
-public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
+public class SimilarContactsAdapter extends RecyclerView.Adapter<SimilarContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
     private Context context;
-    @Inject
-    public ContactsAdapter() {}
+
+    public SimilarContactsAdapter(List<ContactEntity> entities) {
+        this.mContacts = entities;
+    }
 
     public void setData(List<ContactEntity> contacts) {
         mContacts = contacts;
@@ -39,7 +37,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext())
-                                  .inflate(R.layout.layout_contact_row_item, parent,  false);
+                .inflate(R.layout.layout_similar_contact_row_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -54,9 +52,9 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        @Nullable @Bind(R.id.contact_id) protected TextView mId;
-        @Nullable @Bind(R.id.contact_name) protected TextView mName;
-        @Nullable @Bind(R.id.itemBackground) protected RelativeLayout mBackground;
+        @Nullable
+        @Bind(R.id.contact_name)
+        protected TextView mName;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -64,14 +62,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         }
 
         public void bind(final ContactEntity entity) {
-            mId.setText("" +entity.contactID);
-            mName.setText(entity.firstNane+" "+entity.lastName);
-            mBackground.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    context.startActivity(DetailsActivity.getInstance(context, entity, mContacts));
-                }
-            });
+            mName.setText(entity.firstNane + " " + entity.lastName);
         }
     }
 }
