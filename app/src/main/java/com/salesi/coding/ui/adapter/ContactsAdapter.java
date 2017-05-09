@@ -111,6 +111,24 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                     context.startActivity(phoneIntent);
                 }
             });
+
+            iconEmail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String email = entity.email;
+
+                    if (TextUtils.isEmpty(email)){
+                        Toast.makeText(context, "email is not valid", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                    emailIntent.setType("message/rfc822");
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {email});
+
+                    context.startActivity(emailIntent);
+                }
+            });
         }
     }
 }
