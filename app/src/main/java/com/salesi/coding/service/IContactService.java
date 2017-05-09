@@ -10,5 +10,8 @@ import java.util.List;
  * Copyright © 2017 sales­i
  */
 public interface IContactService {
+
     List<ContactEntity> fetchContacts();
+
+    List<ContactEntity> fetchContactsWithSharedHobby(ContactEntity contactToMatch);
 }

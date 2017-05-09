@@ -1,16 +1,29 @@
 package com.salesi.coding.ui.screens;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
+import com.salesi.coding.service.IContactService;
+import com.salesi.coding.ui.adapter.ContactsAdapter;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import dagger.Lazy;
 
 public class ContactDetailsActivity extends AppCompatActivity {
 
@@ -65,6 +78,15 @@ public class ContactDetailsActivity extends AppCompatActivity {
     @Bind(R.id.tvHobbies)
     protected TextView tvHobbies;
 
+    @Bind(R.id.list_contacts)
+    protected RecyclerView mRecycler;
+
+    @Inject
+    protected Lazy<IContactService> mContactService;
+
+    @Inject
+    protected Lazy<ContactsAdapter> mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,12 +130,32 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < selectedContact.Hobbies.size(); ++i) {
-            stringBuilder.append(selectedContact.Hobbies.get(i));
-            if (i != selectedContact.Hobbies.size() - 1) {
-                stringBuilder.append(", ");
+            if (!TextUtils.isEmpty(selectedContact.Hobbies.get(i))) {
+                stringBuilder.append(selectedContact.Hobbies.get(i));
+                if (i != selectedContact.Hobbies.size() - 1) {
+                    stringBuilder.append(", ");
+                }
             }
         }
         tvHobbies.setText(stringBuilder.toString());
+
+        new AsyncTask<ContactEntity, Void, List<ContactEntity>>() {
+
+            @Override
+            protected List<ContactEntity> doInBackground(ContactEntity... params) {
+                return mContactService.get().fetchContactsWithSharedHobby(params[0]);
+            }
+
+            @Override
+            protected void onPostExecute(List<ContactEntity> contactEntities) {
+                mRecycler.setLayoutManager(new LinearLayoutManager(ContactDetailsActivity.this));
+                mRecycler.addItemDecoration(new DividerItemDecoration(ContactDetailsActivity.this, LinearLayoutManager.VERTICAL));
+                mRecycler.setItemAnimator(new DefaultItemAnimator());
+
+                mAdapter.get().setData(contactEntities);
+                mRecycler.setAdapter(mAdapter.get());
+            }
+        }.execute(selectedContact);
     }
 
     @Override
