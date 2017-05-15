@@ -27,4 +27,11 @@ public class ContactServiceImpl implements IContactService {
     public ContactEntity fetchContact(int position) {
         return mMapper.fetchContact(position);
     }
+
+    @Override
+    public List<ContactEntity> hobbyFriends(int contactPosition) {
+        return mMapper.hobbyFriends(contactPosition);
+    }
+
+
 }

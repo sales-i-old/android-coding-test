@@ -21,24 +21,24 @@ public class AddressEntity {
 
     public String toString() {
         String address = Address1;
-        if (Address2.length() > 0) {
+        if (null != Address2 && Address2.length() > 0 && ! Address2.equals("null")) {
             address += "\n" + Address2;
         }
-        if (Address3.length() > 0) {
+        if (null != Address3 && Address3.length() > 0 && ! Address3.equals("null")) {
             address += "\n" + Address3;
         }
-        if (Address4.length() > 0) {
+        if (null != Address4 && Address4.length() > 0 && ! Address4.equals("null")) {
             address += "\n" + Address4;
         }
-        if (Postcode.length() > 0) {
+        if (null != Postcode && Postcode.length() > 0 && ! Postcode.equals("null")) {
             address += "\n" + Postcode + " " + Town;
         }  else {
             address += "\n" + Town;
         }
-        if (County.length() > 0) {
+        if (null != County && County.length() > 0 && ! County.equals("null")) {
             address += "\n" + County;
         }
-        if (Country.length() > 0) {
+        if (null != Address2 && Country.length() > 0 && ! Country.equals("null")) {
             address += "\n" + Country;
         }
         return address;

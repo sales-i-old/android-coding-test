@@ -17,4 +17,6 @@ public interface IContactMapper {
 
     @Nullable
     ContactEntity fetchContact(int position);
+
+    List<ContactEntity> hobbyFriends(int contactPosition);
 }

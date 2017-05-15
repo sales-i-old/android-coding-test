@@ -23,7 +23,11 @@ public class ContactEntity {
     @Expose public AddressEntity Address;
 
     public String getCompleteName() {
-        String name = Title + " " + FirstNane + " " + LastName;
+        String name = "";
+        if (null != Title && Title.length() > 0 && ! Title.equals("null")) {
+            name += Title + " ";
+        }
+        name += FirstNane + " " + LastName;
         return name.trim();
     }
 
