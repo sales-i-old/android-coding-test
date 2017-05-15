@@ -14,4 +14,17 @@ public class ContactEntity {
     @Expose public String Title;
     @Expose public String FirstNane;
     @Expose public String LastName;
+    @Expose public String JobTitle;
+    @Expose public String PhoneNumber;
+    @Expose public String Email;
+
+    @Expose public String[] Hobbies;
+
+    @Expose public AddressEntity Address;
+
+    public String getCompleteName() {
+        String name = Title + " " + FirstNane + " " + LastName;
+        return name.trim();
+    }
+
 }

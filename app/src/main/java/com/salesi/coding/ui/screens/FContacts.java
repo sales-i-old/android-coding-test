@@ -1,6 +1,7 @@
 package com.salesi.coding.ui.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.salesi.coding.ContactDetailsActivity;
 import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
@@ -67,6 +69,12 @@ public class FContacts extends Fragment {
                 mRecycler.setItemAnimator(new DefaultItemAnimator());
 
                 mAdapter.get().setData(contacts);
+                mAdapter.get().setContactClickListener(new ContactsAdapter.ContactClickListener() {
+                    @Override
+                    public void contactClicked(int position) {
+                        showContactDetails(position);
+                    }
+                });
                 mRecycler.setAdapter(mAdapter.get());
             }
         });
@@ -78,5 +86,11 @@ public class FContacts extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    private void showContactDetails(int position) {
+        Intent intent = new Intent(getContext(), ContactDetailsActivity.class);
+        intent.putExtra("position", position);
+        startActivity(intent);
     }
 }

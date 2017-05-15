@@ -22,4 +22,9 @@ public class ContactServiceImpl implements IContactService {
     public List<ContactEntity> fetchContacts() {
         return mMapper.fetchContacts();
     }
+
+    @Override
+    public ContactEntity fetchContact(Integer ContactID) {
+        return mMapper.fetchContact(ContactID);
+    }
 }
