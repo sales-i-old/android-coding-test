@@ -21,5 +21,9 @@
     <string name="users_similar_hobbies">Users with similar hobbies</string>
     <string name="phone_number_not_valid">Phone number is not valid</string>
     <string name="allow_phone_permission">"Allow phone permission in app settings"</string>
+    <string name="send_email_subject">"Subject"</string>
+    <string name="send_email_body">"Body"</string>
+    <string name="send_email">"Send email..."</string>
+    <string name="email_not_valid">Email is not valid</string>
 
 </resources>
