@@ -22,28 +22,116 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/toolbar"
             android:background="@android:color/white"
-            android:layout_below="@id/toolbar">
+            android:orientation="vertical"
+            android:padding="6dp">
 
             <TextView
                 android:id="@+id/view_details_id"
-                android:text="Arriva PLC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="12dp"
                 android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
                 android:textColor="@android:color/holo_blue_dark"
-                tools:targetApi="ICE_CREAM_SANDWICH"
-                android:textStyle="normal|bold"
                 android:textSize="18sp"
-                />
+                android:textStyle="normal"
+                tools:targetApi="ICE_CREAM_SANDWICH"
+                tools:text="885" />
 
+            <TextView
+                android:id="@+id/view_details_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                tools:targetApi="ICE_CREAM_SANDWICH"
+                tools:text="Complete Name" />
+
+            <TextView
+                android:id="@+id/view_details_jobtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                tools:targetApi="ICE_CREAM_SANDWICH"
+                tools:text="Job Title" />
+
+            <TextView
+                android:id="@+id/view_details_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                tools:targetApi="ICE_CREAM_SANDWICH"
+                tools:text="321321321" />
+
+            <TextView
+                android:id="@+id/view_details_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="18sp"
+                android:textStyle="normal|bold"
+                tools:targetApi="ICE_CREAM_SANDWICH"
+                tools:text="mail@example.com" />
+
+            <TextView
+                android:id="@+id/view_details_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="6dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:targetApi="ICE_CREAM_SANDWICH"
+                tools:text="Address" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/hobbies"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:targetApi="ICE_CREAM_SANDWICH" />
+
+            <TextView
+                android:id="@+id/view_details_hobbies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="12dp"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="18sp"
+                android:textStyle="normal"
+                tools:targetApi="ICE_CREAM_SANDWICH"
+                tools:text="list of hobbies" />
 
         </LinearLayout>
 
-
     </android.support.design.widget.AppBarLayout>
-
-
 
 </android.support.design.widget.CoordinatorLayout>
