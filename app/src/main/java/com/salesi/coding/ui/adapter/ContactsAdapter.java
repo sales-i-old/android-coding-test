@@ -1,10 +1,13 @@
 package com.salesi.coding.ui.adapter;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.salesi.coding.R;
@@ -16,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Contacts view adapter
@@ -65,6 +69,13 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Nullable
         @Bind(R.id.contact_name)
         protected TextView mName;
+        @Nullable
+        @Bind(R.id.email)
+        protected ImageView email;
+        @Nullable
+        @Bind(R.id.phone)
+        protected ImageView phone;
+
 
         private setContactOnClickListener listener;
 
@@ -72,6 +83,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
+            phone.setOnClickListener(this);
         }
 
         public void bind(ContactEntity entity) {
@@ -85,11 +97,21 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            listener.onContactClicked(v);
+            if (v.getId() == R.id.phone) {
+                listener.onContactPhoneClicked(v);
+            } else if (v.getId() == R.id.email) {
+                listener.onContactEmailClicked(v);
+            } else {
+                listener.onContactClicked(v);
+            }
         }
     }
 
     public interface setContactOnClickListener {
         void onContactClicked(View v);
+        void onContactPhoneClicked(View v);
+        void onContactEmailClicked(View v);
+
     }
+
 }

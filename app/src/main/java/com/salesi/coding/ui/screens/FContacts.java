@@ -2,6 +2,7 @@ package com.salesi.coding.ui.screens;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -77,8 +78,16 @@ public class FContacts extends Fragment {
                     @Override
                     public void onContactClicked(View v) {
                         showContactDetails(mRecycler.getChildAdapterPosition(v));
+                    }
 
-                        //String value = mAdapter.getItemAtPosition(position).toString();
+                    @Override
+                    public void onContactPhoneClicked(View v) {
+                        contactByPhoneNumber(mRecycler.getChildAdapterPosition(v));
+                    }
+
+                    @Override
+                    public void onContactEmailClicked(View v) {
+                        contactByEmail(mRecycler.getChildAdapterPosition(v));
                     }
                 });
                 mRecycler.setAdapter(mAdapter.get());
@@ -87,6 +96,25 @@ public class FContacts extends Fragment {
 
         return view;
     }
+
+    public void contactByPhoneNumber(Integer contactPosition) {
+        List<ContactEntity> contacts = mContactService.get().fetchContacts();
+        ContactEntity contactDetails = contacts.get(contactPosition);
+
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + contactDetails.PhoneNumber));
+        startActivity(intent);
+    }
+
+    public void contactByEmail(Integer contactPosition) {
+        List<ContactEntity> contacts = mContactService.get().fetchContacts();
+        ContactEntity contactDetails = contacts.get(contactPosition);
+
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",contactDetails.Email, null));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+        startActivity(Intent.createChooser(emailIntent, "Send email..."));
+    }
+
 
     public void showContactDetails(Integer contactPosition) {
         Intent contactDetailsIntent = new Intent(getActivity(), ContactDetailsActivity.class);
