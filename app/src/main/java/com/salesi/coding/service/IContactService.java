@@ -11,5 +11,6 @@ import java.util.List;
  */
 public interface IContactService {
     List<ContactEntity> fetchContacts();
-    ContactEntity fetchContact(Integer ContactID);
+    ContactEntity fetchContact(int postion);
+
 }

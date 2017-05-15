@@ -24,7 +24,7 @@ public class ContactServiceImpl implements IContactService {
     }
 
     @Override
-    public ContactEntity fetchContact(Integer ContactID) {
-        return mMapper.fetchContact(ContactID);
+    public ContactEntity fetchContact(int position) {
+        return mMapper.fetchContact(position);
     }
 }
