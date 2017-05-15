@@ -19,14 +19,21 @@ import butterknife.ButterKnife;
 
 /**
  * Contacts view adapter
- *
+ * <p>
  * Copyright © 2017 sales­i
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
+    private setContactOnClickListener listener;
+    private int _position;
 
     @Inject
-    public ContactsAdapter() {}
+    public ContactsAdapter() {
+    }
+
+    public void setContactOnClickListener(setContactOnClickListener listener) {
+        this.listener = listener;
+    }
 
     public void setData(List<ContactEntity> contacts) {
         mContacts = contacts;
@@ -35,13 +42,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                                  .inflate(R.layout.layout_contact_row_item, parent,  false);
-        return new ViewHolder(view);
+                .inflate(R.layout.layout_contact_row_item, parent, false);
+
+        ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.setContactOnClickListener(listener);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bind(mContacts.get(position));
+        _position = position;
     }
 
     @Override
@@ -49,18 +60,38 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         return mContacts.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        @Nullable @Bind(R.id.contact_id) protected TextView mId;
-        @Nullable @Bind(R.id.contact_name) protected TextView mName;
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @Nullable
+        @Bind(R.id.contact_id)
+        protected TextView mId;
+        @Nullable
+        @Bind(R.id.contact_name)
+        protected TextView mName;
+
+        private setContactOnClickListener listener;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
         }
 
         public void bind(ContactEntity entity) {
-            mId.setText(entity.ContactID.toString());
-            mName.setText(entity.FirstNane+" "+entity.LastName);
+            mId.setText(String.valueOf(entity.ContactID));
+            mName.setText(entity.FirstNane + " " + entity.LastName);
         }
+
+        public void setContactOnClickListener(setContactOnClickListener listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onContactClicked(v);
+        }
+    }
+
+    public interface setContactOnClickListener {
+        void onContactClicked(View v);
     }
 }

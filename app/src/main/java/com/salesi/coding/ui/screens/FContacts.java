@@ -1,6 +1,7 @@
 package com.salesi.coding.ui.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.salesi.coding.ContactDetailsActivity;
 import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
@@ -28,15 +30,18 @@ import dagger.Lazy;
 
 /**
  * Fragment matching first tab
- *
+ * <p>
  * Copyright © 2017 sales­i
  */
 
 public class FContacts extends Fragment {
-    @Inject protected Lazy<IContactService> mContactService;
-    @Inject protected Lazy<ContactsAdapter> mAdapter;
+    @Inject
+    protected Lazy<IContactService> mContactService;
+    @Inject
+    protected Lazy<ContactsAdapter> mAdapter;
 
-    @Bind(R.id.list_contacts) protected RecyclerView mRecycler;
+    @Bind(R.id.list_contacts)
+    protected RecyclerView mRecycler;
 
     public static FContacts instance() {
         return new FContacts();
@@ -54,7 +59,7 @@ public class FContacts extends Fragment {
         ButterKnife.bind(this, view);
 
         StrictMode.ThreadPolicy strictPolicy = new StrictMode.ThreadPolicy.Builder()
-                                                             .permitAll().build();
+                .permitAll().build();
         StrictMode.setThreadPolicy(strictPolicy);
 
         getActivity().runOnUiThread(new Runnable() {
@@ -67,12 +72,28 @@ public class FContacts extends Fragment {
                 mRecycler.setItemAnimator(new DefaultItemAnimator());
 
                 mAdapter.get().setData(contacts);
+
+                mAdapter.get().setContactOnClickListener(new ContactsAdapter.setContactOnClickListener() {
+                    @Override
+                    public void onContactClicked(View v) {
+                        showContactDetails(mRecycler.getChildAdapterPosition(v));
+
+                        //String value = mAdapter.getItemAtPosition(position).toString();
+                    }
+                });
                 mRecycler.setAdapter(mAdapter.get());
             }
         });
 
         return view;
     }
+
+    public void showContactDetails(Integer contactPosition) {
+        Intent contactDetailsIntent = new Intent(getActivity(), ContactDetailsActivity.class);
+        contactDetailsIntent.putExtra("contactPosition", contactPosition.toString());
+        getActivity().startActivity(contactDetailsIntent);
+    }
+
 
     @Override
     public void onDestroyView() {
