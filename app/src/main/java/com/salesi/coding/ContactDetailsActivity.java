@@ -10,6 +10,7 @@ import com.salesi.coding.entity.ContactAddressEntity;
 import com.salesi.coding.entity.ContactEntity;
 import com.salesi.coding.service.IContactService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -99,7 +100,11 @@ public class ContactDetailsActivity extends AppCompatActivity {
         county.setText(addressEntity.County);
         postal_code.setText(addressEntity.Postcode);
         country.setText(addressEntity.Country);
-        hobbies.setText(contactDetails.Hobbies.toString());
+        String hobbiesString = "";
+        for (int i = 0; i < contactDetails.Hobbies.size(); i++) {
+            hobbiesString += (i == 0) ? contactDetails.Hobbies.get(i) : ", " + contactDetails.Hobbies.get(i);
+        }
+        hobbies.setText(hobbiesString);
 
     }
 }
