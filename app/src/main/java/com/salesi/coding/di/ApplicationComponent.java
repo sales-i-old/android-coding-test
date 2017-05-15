@@ -3,6 +3,7 @@ package com.salesi.coding.di;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.salesi.coding.ContactDetailsActivity;
 import com.salesi.coding.MainActivity;
 import com.salesi.coding.MainApp;
 import com.salesi.coding.mapper.adapter.ContactsAPI;
@@ -20,6 +21,7 @@ import retrofit2.Retrofit;
 public interface ApplicationComponent {
     void inject(MainApp app);
     void inject(MainActivity activity);
+    void inject(ContactDetailsActivity activity);
     void inject(FContacts contacts);
 
     @ApplicationContext Context context();
