@@ -3,7 +3,10 @@ package com.salesi.coding;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -63,6 +66,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
     protected TextView hobbies;
     @Bind(R.id.users_similar_hobbies)
     protected LinearLayout users_similar_hobbies;
+    @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
 
     private int contactId;
@@ -71,12 +75,18 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (getIntent().getBooleanExtra("EXIT", false))
+            finish();
+
         super.onCreate(savedInstanceState);
         ((MainApp) getApplication()).getComponent().inject(this);
 
         setContentView(R.layout.activity_contact_details);
 
         ButterKnife.bind(this);
+
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
 
         Intent intent = getIntent();
         contactId = Integer.parseInt(intent.getStringExtra("contactPosition"));
@@ -86,11 +96,29 @@ public class ContactDetailsActivity extends AppCompatActivity {
         showContactsWithSimilarHobbies();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_close) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void showContactDetails() {
         contacts = mContactService.get().fetchContacts();
         contactDetails = contacts.get(contactId);
 
-        contact_id.setText(contactDetails.ContactID.toString());
+        contact_id.setText(String.valueOf(contactDetails.ContactID));
         title.setText(contactDetails.Title);
         first_name.setText(contactDetails.FirstNane);
         last_name.setText(contactDetails.LastName);
