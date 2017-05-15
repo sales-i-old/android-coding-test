@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,6 +68,12 @@ public class FContacts extends Fragment {
                 mRecycler.setItemAnimator(new DefaultItemAnimator());
 
                 mAdapter.get().setData(contacts);
+                mAdapter.get().setContactClickListener(new ContactsAdapter.ContactClickListener() {
+                    @Override
+                    public void contactClicked(Integer ContactID) {
+                        Log.d("CONTACT", "clicked " + ContactID.toString());
+                    }
+                });
                 mRecycler.setAdapter(mAdapter.get());
             }
         });

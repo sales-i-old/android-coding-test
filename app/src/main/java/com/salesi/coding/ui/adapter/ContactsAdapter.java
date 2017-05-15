@@ -2,7 +2,6 @@ package com.salesi.coding.ui.adapter;
 
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +24,7 @@ import butterknife.ButterKnife;
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
+    private ContactClickListener listener;
 
     @Inject
     public ContactsAdapter() {}
@@ -33,11 +33,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         mContacts = contacts;
     }
 
+    public void setContactClickListener(ContactClickListener listener) {
+        this.listener = listener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                                   .inflate(R.layout.layout_contact_row_item, parent,  false);
-        return new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.setContactClickListener(listener);
+        return viewHolder;
     }
 
     @Override
@@ -54,6 +60,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
 
+        private ContactClickListener listener;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -65,9 +73,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             mName.setText(entity.FirstNane +" "+entity.LastName);
         }
 
+        public void setContactClickListener(ContactClickListener listener) {
+            this.listener = listener;
+        }
+
         @Override
         public void onClick(View v) {
-            Log.d("CONTACT", "clicked");
+            listener.contactClicked(Integer.parseInt(mId.getText().toString()));
         }
+    }
+
+    public interface ContactClickListener {
+        void contactClicked(Integer ContactID);
     }
 }
