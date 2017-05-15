@@ -44,14 +44,11 @@ public class ContactMapperImpl implements IContactMapper {
 
     @Nullable
     @Override
-    public ContactEntity fetchContact(Integer ContactID) {
+    public ContactEntity fetchContact(int position) {
         fetchContactsIfNecessary();
         ContactEntity contactFound = null;
-        for (ContactEntity contact : contacts) {
-            if (contact.ContactID.equals(ContactID)) {
-                contactFound = contact;
-                break;
-            }
+        if (null != contacts && position < contacts.size()) {
+            contactFound = contacts.get(position);
         }
         return contactFound;
     }

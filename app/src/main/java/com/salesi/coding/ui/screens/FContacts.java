@@ -71,8 +71,8 @@ public class FContacts extends Fragment {
                 mAdapter.get().setData(contacts);
                 mAdapter.get().setContactClickListener(new ContactsAdapter.ContactClickListener() {
                     @Override
-                    public void contactClicked(Integer ContactID) {
-                        showContactDetails(ContactID);
+                    public void contactClicked(int position) {
+                        showContactDetails(position);
                     }
                 });
                 mRecycler.setAdapter(mAdapter.get());
@@ -88,9 +88,9 @@ public class FContacts extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    private void showContactDetails(Integer ContactID) {
+    private void showContactDetails(int position) {
         Intent intent = new Intent(getContext(), ContactDetailsActivity.class);
-        intent.putExtra("ContactID", ContactID);
+        intent.putExtra("position", position);
         startActivity(intent);
     }
 }

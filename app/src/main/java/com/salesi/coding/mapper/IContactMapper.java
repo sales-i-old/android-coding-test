@@ -16,5 +16,5 @@ public interface IContactMapper {
     List<ContactEntity> fetchContacts();
 
     @Nullable
-    ContactEntity fetchContact(Integer ContactID);
+    ContactEntity fetchContact(int position);
 }

@@ -39,12 +39,12 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     private void loadContactData() {
         Bundle b = getIntent().getExtras();
-        Integer ContactID = b.getInt("ContactID");
+        int position = b.getInt("position");
 
         MainApp mainApp = ((MainApp) getApplication());
-        ContactEntity contact = mainApp.getComponent().contactService().fetchContact(ContactID);
+        ContactEntity contact = mainApp.getComponent().contactService().fetchContact(position);
 
-        mContactID.setText(String.valueOf(ContactID));
+        mContactID.setText(String.valueOf(contact.ContactID));
         mAddress.setText(null != contact.Address ? contact.Address.toString() : "");
         mName.setText(contact.getCompleteName());
 

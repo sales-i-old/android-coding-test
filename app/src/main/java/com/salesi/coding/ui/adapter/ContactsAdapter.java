@@ -79,11 +79,11 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            listener.contactClicked(Integer.parseInt(mId.getText().toString()));
+            listener.contactClicked(getAdapterPosition());
         }
     }
 
     public interface ContactClickListener {
-        void contactClicked(Integer ContactID);
+        void contactClicked(int position);
     }
 }
