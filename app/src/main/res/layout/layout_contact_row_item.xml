@@ -43,18 +43,19 @@
         android:layout_alignBaseline="@+id/contact_id" />
 
     <ImageView
+        android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/stat_sys_phone_call"
-        android:layout_marginLeft="74dp"
-        android:layout_marginStart="74dp"
         android:id="@+id/phone"
-        android:layout_below="@+id/contact_id"
-        android:layout_toRightOf="@+id/contact_id"
-        android:layout_toEndOf="@+id/contact_id"
         android:tintMode="src_in"
         android:tint="@android:color/holo_red_light"
-        tools:targetApi="ICE_CREAM_SANDWICH" />
+        tools:targetApi="ICE_CREAM_SANDWICH"
+        android:layout_below="@+id/contact_id"
+        android:layout_toLeftOf="@+id/email"
+        android:layout_toStartOf="@+id/email"
+        android:layout_marginRight="25dp"
+        android:layout_marginEnd="25dp" />
 
     <ImageView
         android:layout_width="wrap_content"

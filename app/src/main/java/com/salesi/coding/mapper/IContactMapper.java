@@ -1,5 +1,7 @@
 package com.salesi.coding.mapper;
 
+import android.support.annotation.Nullable;
+
 import com.salesi.coding.entity.ContactEntity;
 
 import java.util.List;
@@ -10,5 +12,11 @@ import java.util.List;
  * Copyright © 2017 sales­i
  */
 public interface IContactMapper {
+
     List<ContactEntity> fetchContacts();
+
+    @Nullable
+    ContactEntity fetchContact(int position);
+
+    List<ContactEntity> hobbyFriends(int contactPosition);
 }
