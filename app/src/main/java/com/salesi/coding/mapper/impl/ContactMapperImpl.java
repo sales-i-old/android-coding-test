@@ -82,8 +82,25 @@ public class ContactMapperImpl implements IContactMapper {
     }
 
     private boolean hasCommonHobby(ContactEntity c1, ContactEntity c2) {
-        List<String> list1 = new ArrayList<>(Arrays.asList(c1.Hobbies));
-        List<String> list2 = new ArrayList<>(Arrays.asList(c2.Hobbies));
+        String[] hobbies1 = new String[c1.Hobbies.length];
+        String[] hobbies2 = new String[c2.Hobbies.length];
+        for (int i = 0; i < hobbies1.length; i++) {
+            if (null != c1.Hobbies[i]) {
+                hobbies1[i] = c1.Hobbies[i].toLowerCase();
+            } else {
+                hobbies1[i] = null;
+            }
+        }
+        for (int i = 0; i < hobbies2.length; i++) {
+            if (null != c2.Hobbies[i]) {
+                hobbies2[i] = c2.Hobbies[i].toLowerCase();
+            } else {
+                hobbies2[i] = null;
+            }
+        }
+        List<String> list1 = new ArrayList<>( Arrays.asList(hobbies1));
+        List<String> list2 = new ArrayList<>(Arrays.asList(hobbies2));
+
         list1.retainAll(list2);
         return list1.size() > 0;
     }
