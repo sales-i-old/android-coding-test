@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.salesi.coding.R;
@@ -59,6 +60,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
+        @Bind(R.id.phone) protected ImageView mPhone;
 
         private ContactClickListener listener;
 
@@ -66,6 +68,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
+            mPhone.setOnClickListener(this);
         }
 
         public void bind(ContactEntity entity) {
@@ -79,11 +82,16 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         @Override
         public void onClick(View v) {
-            listener.contactClicked(getAdapterPosition());
+            if (v.getId() == R.id.phone) {
+                listener.makeCallClicked(getAdapterPosition());
+            } else {
+                listener.contactClicked(getAdapterPosition());
+            }
         }
     }
 
     public interface ContactClickListener {
         void contactClicked(int position);
+        void makeCallClicked(int position);
     }
 }

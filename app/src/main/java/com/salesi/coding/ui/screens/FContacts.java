@@ -2,6 +2,7 @@ package com.salesi.coding.ui.screens;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
@@ -74,6 +75,11 @@ public class FContacts extends Fragment {
                     public void contactClicked(int position) {
                         showContactDetails(position);
                     }
+
+                    @Override
+                    public void makeCallClicked(int position) {
+                        makeCall(position);
+                    }
                 });
                 mRecycler.setAdapter(mAdapter.get());
             }
@@ -93,4 +99,15 @@ public class FContacts extends Fragment {
         intent.putExtra("position", position);
         startActivity(intent);
     }
+
+    public void makeCall(int position) {
+        ContactEntity contact = mContactService.get().fetchContact(position);
+        if (null != contact.PhoneNumber && contact.PhoneNumber.length() > 0 && ! contact.PhoneNumber.equals("null")) {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + contact.PhoneNumber));
+            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
+    }
+
 }
