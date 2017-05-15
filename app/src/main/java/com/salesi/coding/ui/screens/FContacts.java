@@ -80,6 +80,11 @@ public class FContacts extends Fragment {
                     public void makeCallClicked(int position) {
                         makeCall(position);
                     }
+
+                    @Override
+                    public void sendEmailClicked(int position) {
+                        sendEmail(position);
+                    }
                 });
                 mRecycler.setAdapter(mAdapter.get());
             }
@@ -100,10 +105,22 @@ public class FContacts extends Fragment {
         startActivity(intent);
     }
 
-    public void makeCall(int position) {
+    private void makeCall(int position) {
         ContactEntity contact = mContactService.get().fetchContact(position);
         if (null != contact.PhoneNumber && contact.PhoneNumber.length() > 0 && ! contact.PhoneNumber.equals("null")) {
             Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + contact.PhoneNumber));
+            if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
+    }
+
+    private void sendEmail(int position) {
+        ContactEntity contact = mContactService.get().fetchContact(position);
+        if (null != contact.Email && contact.Email.length() > 0 && ! contact.Email.equals("null")) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            Uri data = Uri.parse("mailto:" + contact.Email);
+            intent.setData(data);
             if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
                 startActivity(intent);
             }

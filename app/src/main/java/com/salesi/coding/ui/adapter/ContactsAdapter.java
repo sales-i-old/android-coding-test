@@ -61,6 +61,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
         @Bind(R.id.phone) protected ImageView mPhone;
+        @Bind(R.id.email) protected ImageView mEmail;
 
         private ContactClickListener listener;
 
@@ -69,6 +70,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
             mPhone.setOnClickListener(this);
+            mEmail.setOnClickListener(this);
         }
 
         public void bind(ContactEntity entity) {
@@ -84,7 +86,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         public void onClick(View v) {
             if (v.getId() == R.id.phone) {
                 listener.makeCallClicked(getAdapterPosition());
-            } else {
+            } else if (v.getId() == R.id.email) {
+                listener.sendEmailClicked(getAdapterPosition());
+            }
+            else {
                 listener.contactClicked(getAdapterPosition());
             }
         }
@@ -93,5 +98,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     public interface ContactClickListener {
         void contactClicked(int position);
         void makeCallClicked(int position);
+        void sendEmailClicked(int position);
     }
 }
