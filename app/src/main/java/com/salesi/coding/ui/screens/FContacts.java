@@ -1,18 +1,23 @@
 package com.salesi.coding.ui.screens;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.salesi.coding.ContactDetailsActivity;
 import com.salesi.coding.MainApp;
@@ -48,9 +53,12 @@ public class FContacts extends Fragment {
         return new FContacts();
     }
 
+    private Context context;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
         ((MainApp) getActivity().getApplication()).getComponent().inject(this);
     }
 
@@ -101,15 +109,22 @@ public class FContacts extends Fragment {
         List<ContactEntity> contacts = mContactService.get().fetchContacts();
         ContactEntity contactDetails = contacts.get(contactPosition);
 
-        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + contactDetails.PhoneNumber));
-        startActivity(intent);
+        if (TextUtils.isEmpty(contactDetails.PhoneNumber))
+            Toast.makeText(this.getActivity(), R.string.phone_number_not_valid, Toast.LENGTH_LONG).show();
+        else {
+            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + contactDetails.PhoneNumber));
+            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this.getActivity(), R.string.allow_phone_permission, Toast.LENGTH_SHORT).show();
+            } else
+                startActivity(intent);
+        }
     }
 
     public void contactByEmail(Integer contactPosition) {
         List<ContactEntity> contacts = mContactService.get().fetchContacts();
         ContactEntity contactDetails = contacts.get(contactPosition);
 
-        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto",contactDetails.Email, null));
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", contactDetails.Email, null));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
         emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
         startActivity(Intent.createChooser(emailIntent, "Send email..."));
