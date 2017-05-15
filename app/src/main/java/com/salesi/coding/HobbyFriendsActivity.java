@@ -1,7 +1,6 @@
 package com.salesi.coding;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.TextView;
@@ -13,7 +12,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class HobbyFriendsActivity extends AppCompatActivity {
+public class HobbyFriendsActivity extends BaseActivity {
     @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
     @Bind(R.id.view_hobbyfriends_name) protected TextView mName;

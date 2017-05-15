@@ -2,7 +2,6 @@ package com.salesi.coding;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -13,7 +12,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ContactDetailsActivity extends AppCompatActivity {
+public class ContactDetailsActivity extends BaseActivity {
     @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
     @Bind(R.id.view_details_id) protected TextView mContactID;
