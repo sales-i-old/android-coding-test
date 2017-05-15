@@ -11,4 +11,5 @@ import java.util.List;
  */
 public interface IContactMapper {
     List<ContactEntity> fetchContacts();
+    ContactEntity fetchContact(Integer ContactID);
 }

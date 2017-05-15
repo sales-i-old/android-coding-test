@@ -34,4 +34,9 @@ public class ContactMapperImpl implements IContactMapper {
         }
         return Collections.EMPTY_LIST;
     }
+
+    @Override
+    public ContactEntity fetchContact(Integer ContactID) {
+        return null;
+    }
 }
