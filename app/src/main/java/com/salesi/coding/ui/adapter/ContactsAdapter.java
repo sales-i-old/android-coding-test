@@ -98,19 +98,19 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.phone) {
-                listener.onContactPhoneClicked(v);
+                listener.onContactPhoneClicked(getAdapterPosition());
             } else if (v.getId() == R.id.email) {
-                listener.onContactEmailClicked(v);
+                listener.onContactEmailClicked(getAdapterPosition());
             } else {
-                listener.onContactClicked(v);
+                listener.onContactClicked(getAdapterPosition());
             }
         }
     }
 
     public interface setContactOnClickListener {
-        void onContactClicked(View v);
-        void onContactPhoneClicked(View v);
-        void onContactEmailClicked(View v);
+        void onContactClicked(int position);
+        void onContactPhoneClicked(int position);
+        void onContactEmailClicked(int position);
 
     }
 

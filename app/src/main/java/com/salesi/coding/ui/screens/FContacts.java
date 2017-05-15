@@ -76,18 +76,18 @@ public class FContacts extends Fragment {
 
                 mAdapter.get().setContactOnClickListener(new ContactsAdapter.setContactOnClickListener() {
                     @Override
-                    public void onContactClicked(View v) {
-                        showContactDetails(mRecycler.getChildAdapterPosition(v));
+                    public void onContactClicked(int position) {
+                        showContactDetails(position);
                     }
 
                     @Override
-                    public void onContactPhoneClicked(View v) {
-                        contactByPhoneNumber(mRecycler.getChildAdapterPosition(v));
+                    public void onContactPhoneClicked(int position) {
+                        contactByPhoneNumber(position);
                     }
 
                     @Override
-                    public void onContactEmailClicked(View v) {
-                        contactByEmail(mRecycler.getChildAdapterPosition(v));
+                    public void onContactEmailClicked(int position) {
+                        contactByEmail(position);
                     }
                 });
                 mRecycler.setAdapter(mAdapter.get());
