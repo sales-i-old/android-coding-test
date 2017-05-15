@@ -2,8 +2,6 @@ package com.salesi.coding.entity;
 
 import com.google.gson.annotations.Expose;
 
-import java.util.List;
-
 /**
  * Contact Entity
  * Edit class members as required
@@ -14,6 +12,23 @@ import java.util.List;
 public class ContactEntity {
     @Expose public Integer ContactID;
     @Expose public String Title;
-    @Expose public String FirstName;
+    @Expose public String FirstNane;
     @Expose public String LastName;
+    @Expose public String JobTitle;
+    @Expose public String PhoneNumber;
+    @Expose public String Email;
+
+    @Expose public String[] Hobbies;
+
+    @Expose public AddressEntity Address;
+
+    public String getCompleteName() {
+        String name = "";
+        if (null != Title && Title.length() > 0 && ! Title.equals("null")) {
+            name += Title + " ";
+        }
+        name += FirstNane + " " + LastName;
+        return name.trim();
+    }
+
 }

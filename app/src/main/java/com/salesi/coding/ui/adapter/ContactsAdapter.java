@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.salesi.coding.R;
@@ -24,6 +25,7 @@ import butterknife.ButterKnife;
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
+    private ContactClickListener listener;
 
     @Inject
     public ContactsAdapter() {}
@@ -32,11 +34,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         mContacts = contacts;
     }
 
+    public void setContactClickListener(ContactClickListener listener) {
+        this.listener = listener;
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                                   .inflate(R.layout.layout_contact_row_item, parent,  false);
-        return new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.setContactClickListener(listener);
+        return viewHolder;
     }
 
     @Override
@@ -49,18 +57,47 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         return mContacts.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
+        @Bind(R.id.phone) protected ImageView mPhone;
+        @Bind(R.id.email) protected ImageView mEmail;
+
+        private ContactClickListener listener;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
+            mPhone.setOnClickListener(this);
+            mEmail.setOnClickListener(this);
         }
 
         public void bind(ContactEntity entity) {
-            mId.setText(entity.ContactID);
-            mName.setText(entity.FirstName+" "+entity.LastName);
+            mId.setText(String.valueOf(entity.ContactID));
+            mName.setText(entity.FirstNane +" "+entity.LastName);
         }
+
+        public void setContactClickListener(ContactClickListener listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId() == R.id.phone) {
+                listener.makeCallClicked(getAdapterPosition());
+            } else if (v.getId() == R.id.email) {
+                listener.sendEmailClicked(getAdapterPosition());
+            }
+            else {
+                listener.contactClicked(getAdapterPosition());
+            }
+        }
+    }
+
+    public interface ContactClickListener {
+        void contactClicked(int position);
+        void makeCallClicked(int position);
+        void sendEmailClicked(int position);
     }
 }

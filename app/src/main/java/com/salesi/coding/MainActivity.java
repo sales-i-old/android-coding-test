@@ -3,7 +3,6 @@ package com.salesi.coding;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.salesi.coding.ui.adapter.TabsAdapter;
@@ -11,13 +10,17 @@ import com.salesi.coding.ui.adapter.TabsAdapter;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     @Bind(R.id.layout_tabs) protected TabLayout mTabLayout;
     @Bind(R.id.view_pager) protected ViewPager mViewPager;
     @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -30,4 +33,5 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
     }
+
 }
