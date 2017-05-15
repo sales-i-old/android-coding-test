@@ -2,4 +2,21 @@
     <string name="app_name">CodingTest</string>
     <string name="base_url">http://www.mocky.io/</string>
     <string name="title_tab_question_1">Contacts</string>
+    <string name="contact_id_label">Contact ID</string>
+    <string name="contact_title_label">Title</string>
+    <string name="contact_first_name_label">FirstNane</string>
+    <string name="contact_last_name_label">LastName</string>
+    <string name="contact_job_title_label">JobTitle</string>
+    <string name="contact_phone_number_label">PhoneNumber</string>
+    <string name="contact_email_label">Email</string>
+    <string name="contact_address1_label">Address1</string>
+    <string name="contact_address2_label">Address2</string>
+    <string name="contact_address3_label">Address3</string>
+    <string name="contact_address4_label">Address4</string>
+    <string name="contact_town_label">Town</string>
+    <string name="contact_county_label">County</string>
+    <string name="contact_postal_code_label">Postcode</string>
+    <string name="contact_country_label">Country</string>
+    <string name="contact_hobbies_label">Hobbies</string>
+
 </resources>
