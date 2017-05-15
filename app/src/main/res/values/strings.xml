@@ -3,4 +3,6 @@
     <string name="base_url">http://www.mocky.io/</string>
     <string name="title_tab_question_1">Contacts</string>
     <string name="hobbies">Hobbies:</string>
+    <string name="people_who_share_my_hobbies">People who share my hobbies</string>
+    <string name="hobby_friends">Hobby friends:</string>
 </resources>

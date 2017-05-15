@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ContactDetailsActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".HobbyFriendsActivity" android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

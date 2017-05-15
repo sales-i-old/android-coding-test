@@ -1,5 +1,6 @@
 package com.salesi.coding;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import com.salesi.coding.entity.ContactEntity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ContactDetailsActivity extends AppCompatActivity {
     @Bind(R.id.toolbar) protected Toolbar mToolbar;
@@ -22,6 +24,8 @@ public class ContactDetailsActivity extends AppCompatActivity {
     @Bind(R.id.view_details_email) protected TextView mEmail;
     @Bind(R.id.view_details_hobbies) protected TextView mHobbies;
 
+    private int position;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +36,21 @@ public class ContactDetailsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
 
+        Bundle b = getIntent().getExtras();
+        position = b.getInt("position");
+
         loadContactData();
 
     }
 
+    @OnClick(R.id.button_details_hobby)
+    public void onButtonHobbyClick() {
+        Intent intent = new Intent(this, HobbyFriendsActivity.class);
+        intent.putExtra("position", position);
+        startActivity(intent);
+    }
 
     private void loadContactData() {
-        Bundle b = getIntent().getExtras();
-        int position = b.getInt("position");
-
         MainApp mainApp = ((MainApp) getApplication());
         ContactEntity contact = mainApp.getComponent().contactService().fetchContact(position);
 
@@ -48,21 +58,21 @@ public class ContactDetailsActivity extends AppCompatActivity {
         mAddress.setText(null != contact.Address ? contact.Address.toString() : "");
         mName.setText(contact.getCompleteName());
 
-        if (null != contact.JobTitle && contact.JobTitle.length() > 0) {
+        if (null != contact.JobTitle && contact.JobTitle.length() > 0 && ! contact.JobTitle.equals("null")) {
             mJonTitle.setVisibility(View.VISIBLE);
             mJonTitle.setText(contact.JobTitle);
         } else {
             mJonTitle.setVisibility(View.GONE);
         }
 
-        if (null != contact.PhoneNumber && contact.PhoneNumber.length() > 0) {
+        if (null != contact.PhoneNumber && contact.PhoneNumber.length() > 0 && ! contact.PhoneNumber.equals("null")) {
             mPhone.setVisibility(View.VISIBLE);
             mPhone.setText(contact.PhoneNumber);
         } else {
             mPhone.setVisibility(View.GONE);
         }
 
-        if (null != contact.Email &&contact.Email.length() > 0) {
+        if (null != contact.Email && contact.Email.length() > 0 && ! contact.Email.equals("null")) {
             mEmail.setVisibility(View.VISIBLE);
             mEmail.setText(contact.Email);
         } else {

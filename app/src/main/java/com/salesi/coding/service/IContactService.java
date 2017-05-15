@@ -10,6 +10,11 @@ import java.util.List;
  * Copyright © 2017 sales­i
  */
 public interface IContactService {
+
     List<ContactEntity> fetchContacts();
-    ContactEntity fetchContact(Integer ContactID);
+
+    ContactEntity fetchContact(int postion);
+
+    List<ContactEntity> hobbyFriends(int contactPosition);
+
 }

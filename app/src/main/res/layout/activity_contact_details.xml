@@ -130,6 +130,12 @@
                 tools:targetApi="ICE_CREAM_SANDWICH"
                 tools:text="list of hobbies" />
 
+            <Button
+                android:id="@+id/button_details_hobby"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/people_who_share_my_hobbies"/>
+
         </LinearLayout>
 
     </android.support.design.widget.AppBarLayout>
