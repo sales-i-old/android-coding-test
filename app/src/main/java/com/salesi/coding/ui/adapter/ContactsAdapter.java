@@ -25,7 +25,6 @@ import butterknife.ButterKnife;
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
     private setContactOnClickListener listener;
-    private int _position;
 
     @Inject
     public ContactsAdapter() {
@@ -52,7 +51,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.bind(mContacts.get(position));
-        _position = position;
     }
 
     @Override

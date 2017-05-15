@@ -31,4 +31,6 @@ public class ContactEntity {
     public ContactAddressEntity Address;
     @Expose
     public ArrayList<String> Hobbies;
+
+    public int position;
 }

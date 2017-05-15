@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.salesi.coding.entity.ContactAddressEntity;
@@ -26,8 +28,6 @@ import dagger.Lazy;
 public class ContactDetailsActivity extends AppCompatActivity {
     @Inject
     protected Lazy<IContactService> mContactService;
-
-    private int contactId;
 
     @Bind(R.id.contact_id)
     protected TextView contact_id;
@@ -61,6 +61,13 @@ public class ContactDetailsActivity extends AppCompatActivity {
     protected TextView country;
     @Bind(R.id.hobbies)
     protected TextView hobbies;
+    @Bind(R.id.users_similar_hobbies)
+    protected LinearLayout users_similar_hobbies;
+
+
+    private int contactId;
+    private List<ContactEntity> contacts;
+    ContactEntity contactDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,12 +83,11 @@ public class ContactDetailsActivity extends AppCompatActivity {
         //Log.d("contactId", contactId);
 
         showContactDetails();
+        showContactsWithSimilarHobbies();
     }
 
     private void showContactDetails() {
-        ContactEntity contactDetails;
-
-        List<ContactEntity> contacts = mContactService.get().fetchContacts();
+        contacts = mContactService.get().fetchContacts();
         contactDetails = contacts.get(contactId);
 
         contact_id.setText(contactDetails.ContactID.toString());
@@ -105,6 +111,59 @@ public class ContactDetailsActivity extends AppCompatActivity {
             hobbiesString += (i == 0) ? contactDetails.Hobbies.get(i) : ", " + contactDetails.Hobbies.get(i);
         }
         hobbies.setText(hobbiesString);
-
     }
+
+    private void showContactsWithSimilarHobbies() {
+        ArrayList<ContactEntity> similarContacts = new ArrayList<ContactEntity>();
+        ContactEntity contact;
+
+        for (int i = 0; i < contacts.size(); i++) {
+            contact = contacts.get(i);
+            boolean similarHobby = false;
+            if (contact != contactDetails) {
+                if (contact.Hobbies != null && !similarHobby) {
+                    for (int ii = 0; ii < contact.Hobbies.size(); ii++) {
+                        for (int k = 0; k < contactDetails.Hobbies.size(); k++) {
+                            // Log.d("similarContacts", contact.Hobbies.get(ii).toLowerCase() + "/" + contactDetails.Hobbies.get(k).toLowerCase() );
+                            if (contact.Hobbies.get(ii).toLowerCase().equals(contactDetails.Hobbies.get(k).toLowerCase())) {
+                                contact.position = i;
+                                similarContacts.add(contact);
+                                similarHobby = true;
+                                break;
+                            }
+                        }
+                        if(similarHobby)
+                            break;
+                    }
+                }
+            }
+        }
+
+        LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lparams.setMargins(0, 20, 0, 0);
+
+        //Log.d("similarContacts", String.valueOf(similarContacts.size()));
+        for (int kk = 0; kk < similarContacts.size(); kk++) {
+            TextView tv = new TextView(this);
+            tv.setLayoutParams(lparams);
+            contact = similarContacts.get(kk);
+            tv.setTag(contact.position);
+            tv.setText(contact.FirstNane + contact.LastName);
+            users_similar_hobbies.addView(tv);
+
+            tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = 0;
+                    if (v.getTag() instanceof Integer) {
+                        position = (Integer) v.getTag();
+                    }
+                    Intent contactDetailsIntent = new Intent(v.getContext(), ContactDetailsActivity.class);
+                    contactDetailsIntent.putExtra("contactPosition", String.valueOf(position));
+                    v.getContext().startActivity(contactDetailsIntent);
+                }
+            });
+        }
+    }
+
 }
