@@ -74,7 +74,6 @@ public class ContactMapperImpl implements IContactMapper {
         if(contact1.Hobbies != null && contact2.Hobbies != null) {
             for (String curVal : contact1.Hobbies){
                 for (String curVal2 : contact2.Hobbies) {
-                    Log.d("F", curVal.toLowerCase()+ " / " + curVal2.toLowerCase());
                     if (curVal.toLowerCase().contains(curVal2.toLowerCase())) {
                         return true;
                     }
