@@ -84,6 +84,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
             phone.setOnClickListener(this);
+            email.setOnClickListener(this);
         }
 
         public void bind(ContactEntity entity) {
