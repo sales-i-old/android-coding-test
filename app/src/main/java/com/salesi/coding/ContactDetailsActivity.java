@@ -88,7 +88,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     private void showContactDetails() {
         contacts = mContactService.get().fetchContacts();
-        contactDetails = contacts.get(contactPosition);
+        contactDetails = mContactService.get().fetchContact(contactPosition);
 
         contact_id.setText(contactDetails.ContactID.toString());
         title.setText(contactDetails.Title);
@@ -116,7 +116,6 @@ public class ContactDetailsActivity extends AppCompatActivity {
     private void showContactsWithSimilarHobbies() {
         List<ContactEntity> similarContacts = mContactService.get().getContactsWithSimilarHobbies(contactPosition);
         ContactEntity contact;
-
 
         LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         lParams.setMargins(0, 20, 0, 0);
