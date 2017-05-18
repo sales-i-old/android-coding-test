@@ -3,7 +3,10 @@ package com.salesi.coding;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -28,6 +31,7 @@ import dagger.Lazy;
 public class ContactDetailsActivity extends AppCompatActivity {
     @Inject
     protected Lazy<IContactService> mContactService;
+    @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
     @Bind(R.id.contact_id)
     protected TextView contact_id;
@@ -71,6 +75,9 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (getIntent().getBooleanExtra("EXIT", false))
+            finish();
+
         super.onCreate(savedInstanceState);
         ((MainApp) getApplication()).getComponent().inject(this);
 
@@ -78,12 +85,33 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+
         Intent intent = getIntent();
         contactPosition = Integer.parseInt(intent.getStringExtra("contactPosition"));
         //Log.d("contactId", contactId);
 
         showContactDetails();
         showContactsWithSimilarHobbies();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_close) {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intent.putExtra("EXIT", true);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void showContactDetails() {
