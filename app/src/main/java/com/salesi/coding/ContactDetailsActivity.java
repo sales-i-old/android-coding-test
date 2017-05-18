@@ -3,10 +3,7 @@ package com.salesi.coding;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -66,18 +63,14 @@ public class ContactDetailsActivity extends AppCompatActivity {
     protected TextView hobbies;
     @Bind(R.id.users_similar_hobbies)
     protected LinearLayout users_similar_hobbies;
-    @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
 
-    private int contactId;
+    private int contactPosition;
     private List<ContactEntity> contacts;
     ContactEntity contactDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (getIntent().getBooleanExtra("EXIT", false))
-            finish();
-
         super.onCreate(savedInstanceState);
         ((MainApp) getApplication()).getComponent().inject(this);
 
@@ -85,40 +78,19 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-
         Intent intent = getIntent();
-        contactId = Integer.parseInt(intent.getStringExtra("contactPosition"));
+        contactPosition = Integer.parseInt(intent.getStringExtra("contactPosition"));
         //Log.d("contactId", contactId);
 
         showContactDetails();
         showContactsWithSimilarHobbies();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_close) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            intent.putExtra("EXIT", true);
-            startActivity(intent);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void showContactDetails() {
         contacts = mContactService.get().fetchContacts();
-        contactDetails = contacts.get(contactId);
+        contactDetails = contacts.get(contactPosition);
 
-        contact_id.setText(String.valueOf(contactDetails.ContactID));
+        contact_id.setText(contactDetails.ContactID.toString());
         title.setText(contactDetails.Title);
         first_name.setText(contactDetails.FirstNane);
         last_name.setText(contactDetails.LastName);
@@ -142,40 +114,19 @@ public class ContactDetailsActivity extends AppCompatActivity {
     }
 
     private void showContactsWithSimilarHobbies() {
-        ArrayList<ContactEntity> similarContacts = new ArrayList<ContactEntity>();
+        List<ContactEntity> similarContacts = mContactService.get().getContactsWithSimilarHobbies(contactPosition);
         ContactEntity contact;
 
-        for (int i = 0; i < contacts.size(); i++) {
-            contact = contacts.get(i);
-            boolean similarHobby = false;
-            if (contact != contactDetails) {
-                if (contact.Hobbies != null && !similarHobby) {
-                    for (int ii = 0; ii < contact.Hobbies.size(); ii++) {
-                        for (int k = 0; k < contactDetails.Hobbies.size(); k++) {
-                            // Log.d("similarContacts", contact.Hobbies.get(ii).toLowerCase() + "/" + contactDetails.Hobbies.get(k).toLowerCase() );
-                            if (contact.Hobbies.get(ii).toLowerCase().equals(contactDetails.Hobbies.get(k).toLowerCase())) {
-                                contact.position = i;
-                                similarContacts.add(contact);
-                                similarHobby = true;
-                                break;
-                            }
-                        }
-                        if(similarHobby)
-                            break;
-                    }
-                }
-            }
-        }
 
-        LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lparams.setMargins(0, 20, 0, 0);
+        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lParams.setMargins(0, 20, 0, 0);
 
         //Log.d("similarContacts", String.valueOf(similarContacts.size()));
         for (int kk = 0; kk < similarContacts.size(); kk++) {
             TextView tv = new TextView(this);
-            tv.setLayoutParams(lparams);
+            tv.setLayoutParams(lParams);
             contact = similarContacts.get(kk);
-            tv.setTag(contact.position);
+            tv.setTag(contacts.indexOf(contact));
             tv.setText(contact.FirstNane + contact.LastName);
             users_similar_hobbies.addView(tv);
 

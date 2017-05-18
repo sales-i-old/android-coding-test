@@ -114,7 +114,7 @@ public class FContacts extends Fragment {
         else {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + contactDetails.PhoneNumber));
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this.getActivity(), R.string.allow_phone_permission, Toast.LENGTH_LONG).show();
+                Toast.makeText(this.getActivity(), R.string.allow_phone_permission, Toast.LENGTH_SHORT).show();
             } else
                 startActivity(intent);
         }
@@ -125,17 +125,11 @@ public class FContacts extends Fragment {
         ContactEntity contactDetails = contacts.get(contactPosition);
 
         Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", contactDetails.Email, null));
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.send_email_subject));
-        emailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.send_email_body));
-        if (isValidEmail(contactDetails.Email))
-            startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email)));
-        else
-            Toast.makeText(this.getActivity(), R.string.email_not_valid, Toast.LENGTH_LONG).show();
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+        startActivity(Intent.createChooser(emailIntent, "Send email..."));
     }
 
-    public final static boolean isValidEmail(CharSequence target) {
-        return !TextUtils.isEmpty(target) && android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-    }
 
     public void showContactDetails(Integer contactPosition) {
         Intent contactDetailsIntent = new Intent(getActivity(), ContactDetailsActivity.class);

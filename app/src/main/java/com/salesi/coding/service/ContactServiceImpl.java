@@ -22,4 +22,14 @@ public class ContactServiceImpl implements IContactService {
     public List<ContactEntity> fetchContacts() {
         return mMapper.fetchContacts();
     }
+
+    @Override
+    public ContactEntity fetchContact(int position) {
+        return mMapper.fetchContact(position);
+    }
+
+    @Override
+    public List<ContactEntity> getContactsWithSimilarHobbies(int position) {
+        return mMapper.getContactsWithSimilarHobbies(position);
+    }
 }
