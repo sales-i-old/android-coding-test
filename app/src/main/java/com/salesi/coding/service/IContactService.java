@@ -11,4 +11,7 @@ import java.util.List;
  */
 public interface IContactService {
     List<ContactEntity> fetchContacts();
+    ContactEntity fetchContact(int position);
+    List<ContactEntity> getContactsWithSimilarHobbies(int position);
+
 }
