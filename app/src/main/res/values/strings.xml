@@ -2,4 +2,10 @@
     <string name="app_name">CodingTest</string>
     <string name="base_url">http://www.mocky.io/</string>
     <string name="title_tab_question_1">Contacts</string>
+    <string name="contact_id">ContactId</string>
+    <string name="contact_name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="hobbies">Hobbies</string>
 </resources>

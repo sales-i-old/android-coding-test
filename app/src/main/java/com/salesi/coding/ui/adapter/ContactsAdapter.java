@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
+    private static IClickItem mIClickItem;
 
     @Inject
     public ContactsAdapter() {}
@@ -49,6 +50,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         return mContacts.size();
     }
 
+    public void setIClickItem(IClickItem IClickItem) {
+        mIClickItem = IClickItem;
+    }
+
+    public interface IClickItem {
+
+        void onClickItem(ContactEntity contactEntity);
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
@@ -56,11 +66,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mIClickItem.onClickItem(mContacts.get(getAdapterPosition()));
+                }
+            });
         }
 
         public void bind(ContactEntity entity) {
-            mId.setText(entity.ContactID);
-            mName.setText(entity.FirstNane+" "+entity.LastName);
+            mId.setText(entity.getContactID());
+            mName.setText(entity.getFirstNane()+" "+entity.getLastName());
         }
     }
 }

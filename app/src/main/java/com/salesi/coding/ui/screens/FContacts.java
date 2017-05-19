@@ -1,7 +1,9 @@
 package com.salesi.coding.ui.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,6 +20,7 @@ import com.salesi.coding.entity.ContactEntity;
 import com.salesi.coding.service.IContactService;
 import com.salesi.coding.ui.adapter.ContactsAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,11 +35,13 @@ import dagger.Lazy;
  * Copyright © 2017 sales­i
  */
 
-public class FContacts extends Fragment {
+public class FContacts extends Fragment implements ContactsAdapter.IClickItem{
     @Inject protected Lazy<IContactService> mContactService;
     @Inject protected Lazy<ContactsAdapter> mAdapter;
 
     @Bind(R.id.list_contacts) protected RecyclerView mRecycler;
+
+    private List<ContactEntity> contacts;
 
     public static FContacts instance() {
         return new FContacts();
@@ -60,13 +65,14 @@ public class FContacts extends Fragment {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                List<ContactEntity> contacts = mContactService.get().fetchContacts();
+                contacts = mContactService.get().fetchContacts();
 
                 mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
                 mRecycler.setItemAnimator(new DefaultItemAnimator());
 
                 mAdapter.get().setData(contacts);
+                mAdapter.get().setIClickItem(FContacts.this);
                 mRecycler.setAdapter(mAdapter.get());
             }
         });
@@ -78,5 +84,15 @@ public class FContacts extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onClickItem(ContactEntity contactEntity) {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), DetailActivity.class);
+        intent.putParcelableArrayListExtra("contacts", (ArrayList<? extends Parcelable>) contacts);
+        intent.putExtra("contactId", contactEntity.getContactID());
+        intent.putExtra("contactName", contactEntity.getName());
+        startActivity(intent);
     }
 }
