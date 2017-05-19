@@ -1,18 +1,24 @@
 package com.salesi.coding.ui.screens;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.StrictMode;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
@@ -87,12 +93,26 @@ public class FContacts extends Fragment implements ContactsAdapter.IClickItem{
     }
 
     @Override
-    public void onClickItem(ContactEntity contactEntity) {
-        Intent intent = new Intent();
-        intent.setClass(getActivity(), DetailActivity.class);
-        intent.putParcelableArrayListExtra("contacts", (ArrayList<? extends Parcelable>) contacts);
-        intent.putExtra("contactId", contactEntity.getContactID());
-        intent.putExtra("contactName", contactEntity.getName());
-        startActivity(intent);
+    public void onClickItem(View v, ContactEntity contactEntity) {
+        switch (v.getId()) {
+            case R.id.phone:
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + contactEntity.getPhoneNumber()));
+                startActivity(intent);
+                break;
+            case R.id.email:
+                intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", contactEntity.getEmail(), null));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "");
+                intent.putExtra(Intent.EXTRA_TEXT, "");
+                startActivity(Intent.createChooser(intent, "Send email..."));
+                break;
+            default:
+                intent = new Intent();
+                intent.setClass(getActivity(), DetailActivity.class);
+                intent.putParcelableArrayListExtra("contacts", (ArrayList<? extends Parcelable>) contacts);
+                intent.putExtra("contactId", contactEntity.getContactID());
+                intent.putExtra("contactName", contactEntity.getName());
+                startActivity(intent);
+                break;
+        }
     }
 }

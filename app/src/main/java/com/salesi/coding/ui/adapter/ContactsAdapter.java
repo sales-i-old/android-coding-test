@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.salesi.coding.R;
@@ -55,28 +56,32 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     }
 
     public interface IClickItem {
-
-        void onClickItem(ContactEntity contactEntity);
+        void onClickItem(View v, ContactEntity contactEntity);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
+        @Nullable @Bind(R.id.phone) protected ImageView mPhone;
+        @Nullable @Bind(R.id.email) protected ImageView mEmail;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mIClickItem.onClickItem(mContacts.get(getAdapterPosition()));
-                }
-            });
+            itemView.setOnClickListener(this);
+            mPhone.setOnClickListener(this);
+            mEmail.setOnClickListener(this);
         }
 
         public void bind(ContactEntity entity) {
             mId.setText(entity.getContactID());
             mName.setText(entity.getFirstNane()+" "+entity.getLastName());
+        }
+
+
+        @Override
+        public void onClick(View v) {
+            mIClickItem.onClickItem(v, mContacts.get(getAdapterPosition()));
         }
     }
 }
