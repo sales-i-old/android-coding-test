@@ -60,7 +60,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         public void bind(ContactEntity entity) {
             mId.setText(entity.ContactID);
-            mName.setText(entity.FirstName+" "+entity.LastName);
+            mName.setText(entity.FirstNane+" "+entity.LastName);
         }
     }
 }

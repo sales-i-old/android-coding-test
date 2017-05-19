@@ -12,8 +12,8 @@ import java.util.List;
  */
 
 public class ContactEntity {
-    @Expose public Integer ContactID;
+    @Expose public String ContactID;
     @Expose public String Title;
-    @Expose public String FirstName;
+    @Expose public String FirstNane;
     @Expose public String LastName;
 }
