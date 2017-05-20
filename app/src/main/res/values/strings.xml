@@ -2,4 +2,12 @@
     <string name="app_name">CodingTest</string>
     <string name="base_url">http://www.mocky.io/</string>
     <string name="title_tab_question_1">Contacts</string>
+    <string name="app_phone_call_permission">App require permission to make phone call</string>
+    <string name="sending_email">"Send email..."</string>
+    <string name="share_the_hobbies">Share the hobbies on..</string>
+    <string name="share_hobbies">Share hobbies</string>
+    <string name="hobbies">Hobbies</string>
+    <string name="address">Address</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
 </resources>
