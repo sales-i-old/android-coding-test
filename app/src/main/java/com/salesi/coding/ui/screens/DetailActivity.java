@@ -1,26 +1,36 @@
 package com.salesi.coding.ui.screens;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
+import com.salesi.coding.ui.adapter.ContactsAdapter;
+import com.salesi.coding.ui.adapter.ShareHobbyContactsAdapter;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import dagger.Lazy;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements ShareHobbyContactsAdapter.IClickItem{
 
     @Bind(R.id.contact_name)
     TextView contactNameView;
@@ -34,8 +44,6 @@ public class DetailActivity extends AppCompatActivity {
     TextView addressView;
     @Bind(R.id.hobbies_view)
     TextView hobbiesView;
-    @Bind(R.id.share_hobby_view)
-    TextView shareHobbyView;
     @Bind(R.id.job_title_text_view)
     TextView jobTitleTextView;
     @Bind(R.id.phone_text_vew)
@@ -48,13 +56,18 @@ public class DetailActivity extends AppCompatActivity {
     TextView hobbiesTextView;
     @Bind(R.id.share_hobby_text_view)
     TextView shareHobbyTextView;
+    @Bind(R.id.share_hobby_recycler_view)
+    RecyclerView shareHobbyRecyclerView;
     private ArrayList<ContactEntity> contactEntityArrayList;
     private String contactId;
     private String contactName;
+    @Inject
+    protected Lazy<ShareHobbyContactsAdapter> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((MainApp) getApplication()).getComponent().inject(this);
         setContentView(R.layout.activity_detail);
         ButterKnife.bind(this);
         contactId = getIntent().getStringExtra("contactId");
@@ -94,29 +107,41 @@ public class DetailActivity extends AppCompatActivity {
                 String hobbyString = contactEntity.getHobbyString();
                 if (!"".equals(hobbyString)) {
                     hobbiesView.setText(hobbyString);
-                    String shareSameHobbyContactName = "";
+                    List<ContactEntity> contactEntities = new ArrayList<>();
                     for (ContactEntity contactEntity1: contactEntityArrayList) {
                         List<String> hobbies = contactEntity1.getHobbies();
                         if (hobbies != null && hobbies.size()>0) {
                             for (String hobby: hobbies) {
-                                if (hobby != null && hobbyString.toLowerCase().contains(hobby.toLowerCase()) && !contactEntity1.getName().equals(contactName) && !shareSameHobbyContactName.contains(contactEntity1.getName())) {
-                                    shareSameHobbyContactName+=contactEntity1.getName() + ", ";
+                                if (hobby != null && !hobby.equals("") && hobbyString.toLowerCase().contains(hobby.toLowerCase()) && !contactEntity1.getName().equals(contactName) && !contactEntities.contains(contactEntity1)) {
+                                    contactEntities.add(contactEntity1);
                                 }
                             }
                         }
                     }
-                    if (shareSameHobbyContactName.length()>2) {
-                        shareSameHobbyContactName = shareSameHobbyContactName.substring(0, shareSameHobbyContactName.length()-2);
+                    if (contactEntities.size() > 0) {
+                        shareHobbyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+                        shareHobbyRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+                        shareHobbyRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        mAdapter.get().setData(contactEntities);
+                        mAdapter.get().setIClickItem(this);
+                        shareHobbyRecyclerView.setAdapter(mAdapter.get());
                     }
-                    shareHobbyView.setText(shareSameHobbyContactName);
                 } else {
                     hobbiesView.setVisibility(View.GONE);
                     hobbiesTextView.setVisibility(View.GONE);
-                    shareHobbyView.setVisibility(View.GONE);
                     shareHobbyTextView.setVisibility(View.GONE);
                 }
             }
         }
     }
 
+    @Override
+    public void onClickItem(ContactEntity contactEntity) {
+        Intent intent = new Intent();
+        intent.setClass(this, DetailActivity.class);
+        intent.putParcelableArrayListExtra("contacts", (ArrayList<? extends Parcelable>) contactEntityArrayList);
+        intent.putExtra("contactId", contactEntity.getContactID());
+        intent.putExtra("contactName", contactEntity.getName());
+        startActivity(intent);
+    }
 }
