@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/activity_horizontal_margin"
+    tools:context="com.salesi.coding.ui.screens.DetailActivity">
+
+    <TextView
+        android:id="@+id/contact_name_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:text="@string/contact_name"
+        android:textSize="@dimen/detail_title_font_size" />
+
+    <TextView
+        android:id="@+id/contact_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/detail_text_font_size"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/job_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_top"
+        android:text="Title"
+        android:textSize="@dimen/detail_title_font_size" />
+
+    <TextView
+        android:id="@+id/job_title_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/detail_text_font_size"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/phone_text_vew"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_top"
+        android:text="@string/phone_number"
+        android:textSize="@dimen/detail_title_font_size" />
+
+    <TextView
+        android:id="@+id/phone_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/detail_text_font_size"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/email_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_top"
+        android:text="@string/email"
+        android:textSize="@dimen/detail_title_font_size" />
+
+    <TextView
+        android:id="@+id/email_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/detail_text_font_size"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/address_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_top"
+        android:text="@string/address"
+        android:textSize="@dimen/detail_title_font_size" />
+
+    <TextView
+        android:id="@+id/address_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/detail_text_font_size"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/hobbies_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_top"
+        android:text="@string/hobbies"
+        android:textSize="@dimen/detail_title_font_size" />
+
+    <TextView
+        android:id="@+id/hobbies_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:textSize="@dimen/detail_text_font_size"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/share_hobby_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/margin_top"
+        android:text="Who also shares the same hobby"
+        android:textSize="@dimen/detail_title_font_size" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/share_hobby_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+</LinearLayout>
