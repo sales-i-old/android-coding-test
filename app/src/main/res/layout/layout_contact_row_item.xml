@@ -54,6 +54,7 @@
         android:layout_toEndOf="@+id/contact_id"
         android:tintMode="src_in"
         android:tint="@android:color/holo_red_light"
+        android:clickable="true"
         tools:targetApi="ICE_CREAM_SANDWICH" />
 
     <ImageView
@@ -65,6 +66,7 @@
         android:id="@+id/email"
         android:tint="@android:color/holo_red_light"
         android:tintMode="src_in"
+        android:clickable="true"
         tools:targetApi="ICE_CREAM_SANDWICH"
         android:layout_alignBaseline="@+id/phone" />
 
