@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,9 +25,14 @@ public class ContactEntity
     @Expose @SerializedName("PhoneNumber")  public String phoneNumber;
     @Expose @SerializedName("Email")        public String email;
     @Expose @SerializedName("Address")      public AddressEntity address;
+    @Expose @SerializedName("Hobbies")      public List<String> hobbies;
 
-    public String getFullName() {
+    public String getFullName(boolean hasTitle) {
         StringBuilder stringBuilder = new StringBuilder();
+        if(hasTitle) {
+            stringBuilder.append(title);
+            stringBuilder.append(" ");
+        }
         stringBuilder.append(firstName);
         stringBuilder.append(" ");
         stringBuilder.append(lastName);
@@ -48,6 +54,18 @@ public class ContactEntity
 
     public String getFullAddress() {
         return address.getFullAddress();
+    }
+
+    public List<String> getHobbies() {
+        return hobbies == null ? Collections.emptyList() : hobbies;
+    }
+
+    public boolean hasSimilarHobbies(ContactEntity entity) {
+        for(String hobby : entity.getHobbies()) {
+            if(getHobbies().contains(hobby))
+                return true;
+        }
+        return false;
     }
 
     public class AddressEntity

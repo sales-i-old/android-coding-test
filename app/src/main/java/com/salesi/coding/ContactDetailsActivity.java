@@ -48,12 +48,24 @@ public class ContactDetailsActivity
 
         Intent intent = getIntent();
         ContactEntity contact = (ContactEntity) intent.getSerializableExtra(KEY_CONTACT);
+        List<ContactEntity> contacts = (List<ContactEntity>) intent.getSerializableExtra(KEY_CONTACT_LIST);
 
-        mContactDetailsAdapter.add("Full Name: " + contact.getFullName());
+        mContactDetailsAdapter.add("Full Name: " + contact.getFullName(true));
         mContactDetailsAdapter.add("Job Title: " + contact.getJobTitle());
         mContactDetailsAdapter.add("PhoneNumber: " + contact.getPhoneNumber());
         mContactDetailsAdapter.add("Email: " + contact.getEmail());
         mContactDetailsAdapter.add("Address: " + contact.getFullAddress());
+        mContactDetailsAdapter.add("Similar Hobbies:");
+
+        int size = contacts.size();
+        for (int i = 0; i < size; i++) {
+            ContactEntity currentContact = contacts.get(i);
+            if (currentContact.contactId == contact.contactId)
+                continue;
+
+            if (currentContact.hasSimilarHobbies(contact))
+                mContactDetailsAdapter.add(currentContact.getFullName(false));
+        }
     }
 
     public static Intent newIntent(Context context, ContactEntity contact, List<ContactEntity> contacts) {

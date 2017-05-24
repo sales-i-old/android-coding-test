@@ -69,7 +69,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         public void bind(ContactEntity entity) {
             mId.setText(String.valueOf(entity.contactId));
-            mName.setText(entity.getFullName());
+            mName.setText(entity.getFullName(false));
 
             if(listener != null) {
                 itemView.setOnClickListener(v -> listener.onClick(itemView, entity));
