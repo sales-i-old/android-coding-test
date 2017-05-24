@@ -120,7 +120,7 @@ public class FContacts extends Fragment implements ContactsAdapter.OnClickListen
             Toast.makeText(getContext(), R.string.invalid_phone_number, Toast.LENGTH_SHORT).show();
         } else  {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" +phoneNumber));
-            startActivity(intent);
+            startActivityForResult(intent,ContactDetailsActivity.REQUEST_CONTACT_DETAILS);
         }
     }
 
@@ -137,6 +137,15 @@ public class FContacts extends Fragment implements ContactsAdapter.OnClickListen
             } catch (ActivityNotFoundException e) {
                 Toast.makeText(getContext(), R.string.no_available_email_client_found, Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == ContactDetailsActivity.REQUEST_CONTACT_DETAILS && resultCode == ContactDetailsActivity.RESULT_CONTACT_DETAILS) {
+            getActivity().finish();
         }
     }
 }

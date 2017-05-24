@@ -24,6 +24,8 @@ public class ContactDetailsActivity
 
     public static final String KEY_CONTACT = "com.salesi.coding.entity.ContactEntity";
     public static final String KEY_CONTACT_LIST = "com.salesi.coding.entity.ContactEntity_LIST";
+    public static final int REQUEST_CONTACT_DETAILS = 0x000001;
+    public static final int RESULT_CONTACT_DETAILS = 0x000002;
 
     @Bind(R.id.toolbar)
     protected Toolbar mToolbar;
@@ -66,6 +68,21 @@ public class ContactDetailsActivity
             if (currentContact.hasSimilarHobbies(contact))
                 mContactDetailsAdapter.add(currentContact.getFullName(false));
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.close) {
+            setResult(RESULT_CONTACT_DETAILS);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public static Intent newIntent(Context context, ContactEntity contact, List<ContactEntity> contacts) {
