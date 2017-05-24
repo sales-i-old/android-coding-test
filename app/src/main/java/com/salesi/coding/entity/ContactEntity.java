@@ -1,6 +1,7 @@
 package com.salesi.coding.entity;
 
 import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
@@ -12,8 +13,18 @@ import java.util.List;
  */
 
 public class ContactEntity {
-    @Expose public Integer ContactID;
-    @Expose public String Title;
-    @Expose public String FirstName;
-    @Expose public String LastName;
+
+    @Expose @SerializedName("ContactID")    public int contactId;
+    @Expose @SerializedName("Title")        public String title;
+    @Expose @SerializedName("FirstNane")    public String firstName;
+    @Expose @SerializedName("LastName")     public String lastName;
+
+    public String getFullName() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(firstName);
+        stringBuilder.append(" ");
+        stringBuilder.append(lastName);
+
+        return stringBuilder.toString();
+    }
 }
