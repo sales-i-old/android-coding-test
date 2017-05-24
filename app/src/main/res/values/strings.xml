@@ -3,4 +3,5 @@
     <string name="base_url">http://www.mocky.io/</string>
     <string name="title_tab_question_1">Contacts</string>
     <string name="placeholder">Placeholder</string>
+    <string name="invalid_phone_number">Invalid Phone Number</string>
 </resources>

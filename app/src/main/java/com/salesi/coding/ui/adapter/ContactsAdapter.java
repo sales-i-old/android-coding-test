@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.salesi.coding.R;
@@ -61,6 +62,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
+        @Nullable @Bind(R.id.phone) protected ImageView mPhone;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -73,6 +75,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
             if(listener != null) {
                 itemView.setOnClickListener(v -> listener.onClick(itemView, entity));
+                mPhone.setOnClickListener(v -> listener.onClick(mPhone, entity));
             }
         }
     }
