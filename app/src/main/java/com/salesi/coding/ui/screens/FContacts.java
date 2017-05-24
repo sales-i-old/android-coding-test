@@ -1,5 +1,6 @@
 package com.salesi.coding.ui.screens;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -99,6 +100,9 @@ public class FContacts extends Fragment implements ContactsAdapter.OnClickListen
             case R.id.phone:
                 launchCallActivity(contactEntity);
                 break;
+            case R.id.email:
+                launchEmailActivity(contactEntity);
+                break;
             default:
                 launchContactDetailsActivity(contactEntity);
                 break;
@@ -117,6 +121,22 @@ public class FContacts extends Fragment implements ContactsAdapter.OnClickListen
         } else  {
             Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" +phoneNumber));
             startActivity(intent);
+        }
+    }
+
+    private void launchEmailActivity(ContactEntity contactEntity) {
+        String email = contactEntity.email;
+        if(TextUtils.isEmpty(email)) {
+            Toast.makeText(getContext(), R.string.invalid_email, Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.setType("message/rfc822");
+            intent.putExtra(Intent.EXTRA_EMAIL, new String[] { email });
+            try {
+                startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                Toast.makeText(getContext(), R.string.no_available_email_client_found, Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

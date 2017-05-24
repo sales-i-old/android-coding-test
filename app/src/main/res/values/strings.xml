@@ -4,4 +4,6 @@
     <string name="title_tab_question_1">Contacts</string>
     <string name="placeholder">Placeholder</string>
     <string name="invalid_phone_number">Invalid Phone Number</string>
+    <string name="invalid_email">Invalid Email</string>
+    <string name="no_available_email_client_found">No available Email client found</string>
 </resources>

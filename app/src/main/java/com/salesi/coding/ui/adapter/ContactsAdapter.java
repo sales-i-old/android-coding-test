@@ -63,6 +63,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
         @Nullable @Bind(R.id.phone) protected ImageView mPhone;
+        @Nullable @Bind(R.id.email) protected ImageView mEmail;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +77,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             if(listener != null) {
                 itemView.setOnClickListener(v -> listener.onClick(itemView, entity));
                 mPhone.setOnClickListener(v -> listener.onClick(mPhone, entity));
+                mEmail.setOnClickListener(v -> listener.onClick(mEmail, entity));
             }
         }
     }
