@@ -1,8 +1,10 @@
 package com.salesi.coding.ui.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -12,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.salesi.coding.ContactDetailsActivity;
 import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
@@ -32,7 +35,7 @@ import dagger.Lazy;
  * Copyright © 2017 sales­i
  */
 
-public class FContacts extends Fragment {
+public class FContacts extends Fragment implements ContactsAdapter.OnClickListener {
     @Inject protected Lazy<IContactService> mContactService;
     @Inject protected Lazy<ContactsAdapter> mAdapter;
 
@@ -75,8 +78,24 @@ public class FContacts extends Fragment {
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mAdapter.get().setOnClickListener(this);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+    }
+
+    @Override
+    public void onClick(View view, ContactEntity contactEntity) {
+        launchContactDetailsActivity(contactEntity);
+    }
+
+    private void launchContactDetailsActivity(ContactEntity contactEntity) {
+        Intent intent = ContactDetailsActivity.newIntent(getContext(), contactEntity, mAdapter.get().getData());
+        startActivity(intent);
     }
 }

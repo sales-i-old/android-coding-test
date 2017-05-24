@@ -24,12 +24,21 @@ import butterknife.ButterKnife;
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
+    private OnClickListener listener;
+
+    public void setOnClickListener(OnClickListener listener) {
+        this.listener = listener;
+    }
 
     @Inject
     public ContactsAdapter() {}
 
     public void setData(List<ContactEntity> contacts) {
         mContacts = contacts;
+    }
+
+    public List<ContactEntity> getData() {
+        return mContacts;
     }
 
     @Override
@@ -61,6 +70,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         public void bind(ContactEntity entity) {
             mId.setText(String.valueOf(entity.contactId));
             mName.setText(entity.getFullName());
+
+            if(listener != null) {
+                itemView.setOnClickListener(v -> listener.onClick(itemView, entity));
+            }
         }
+    }
+
+    public interface OnClickListener {
+
+        void onClick(View view, ContactEntity contactEntity);
     }
 }

@@ -1,0 +1,65 @@
+package com.salesi.coding;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import com.salesi.coding.entity.ContactEntity;
+import com.salesi.coding.ui.adapter.ContactDetailsAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
+public class ContactDetailsActivity
+        extends AppCompatActivity {
+
+    public static final String KEY_CONTACT = "com.salesi.coding.entity.ContactEntity";
+    public static final String KEY_CONTACT_LIST = "com.salesi.coding.entity.ContactEntity_LIST";
+
+    @Bind(R.id.toolbar)
+    protected Toolbar mToolbar;
+
+    @Bind(R.id.recyclerView)
+    protected RecyclerView mRecyclerView;
+
+    private ContactDetailsAdapter mContactDetailsAdapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_contact_details);
+
+        ButterKnife.bind(this);
+
+        setSupportActionBar(mToolbar);
+        mToolbar.setLogo(R.mipmap.ic_launcher);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mContactDetailsAdapter = new ContactDetailsAdapter();
+        mRecyclerView.setAdapter(mContactDetailsAdapter);
+
+        Intent intent = getIntent();
+        ContactEntity contact = (ContactEntity) intent.getSerializableExtra(KEY_CONTACT);
+
+        mContactDetailsAdapter.add("Full Name: " + contact.getFullName());
+        mContactDetailsAdapter.add("Job Title: " + contact.getJobTitle());
+        mContactDetailsAdapter.add("PhoneNumber: " + contact.getPhoneNumber());
+        mContactDetailsAdapter.add("Email: " + contact.getEmail());
+        mContactDetailsAdapter.add("Address: " + contact.getFullAddress());
+    }
+
+    public static Intent newIntent(Context context, ContactEntity contact, List<ContactEntity> contacts) {
+        Intent intent = new Intent(context, ContactDetailsActivity.class);
+        intent.putExtra(KEY_CONTACT, contact);
+        intent.putExtra(KEY_CONTACT_LIST, new ArrayList<>(contacts));
+        return intent;
+    }
+}
