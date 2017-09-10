@@ -10,7 +10,6 @@ public class Constants {
     public static final String PHONE_NUMBER =   "PhoneNumber";
     public static final String HOBBIES =        "Hobbies";
     public static final String ADDRESS =        "Address";
-
     public static final String MAILTO =        "mailto";
     public static final String TEL =        "tel";
     public static final String SUBJECT =        "Subject";
