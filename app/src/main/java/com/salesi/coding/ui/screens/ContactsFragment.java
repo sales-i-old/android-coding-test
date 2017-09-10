@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,14 +33,14 @@ import dagger.Lazy;
  * Copyright © 2017 sales­i
  */
 
-public class FContacts extends Fragment {
+public class ContactsFragment extends Fragment {
     @Inject protected Lazy<IContactService> mContactService;
     @Inject protected Lazy<ContactsAdapter> mAdapter;
 
     @Bind(R.id.list_contacts) protected RecyclerView mRecycler;
 
-    public static FContacts instance() {
-        return new FContacts();
+    public static ContactsFragment instance() {
+        return new ContactsFragment();
     }
 
     @Override
@@ -57,18 +58,28 @@ public class FContacts extends Fragment {
                                                              .permitAll().build();
         StrictMode.setThreadPolicy(strictPolicy);
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                List<ContactEntity> contacts = mContactService.get().fetchContacts();
+        getActivity().runOnUiThread(() -> {
+            List<ContactEntity> contacts = mContactService.get().fetchContacts();
+            Log.i("myapp","calling fetchContacts");
 
-                mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-                mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-                mRecycler.setItemAnimator(new DefaultItemAnimator());
+            for(ContactEntity contactEntity: contacts) {
+                StringBuilder builder = new StringBuilder();
+                if(contactEntity.getHobbies()!=null) {
+                    for (String hobby : contactEntity.getHobbies()) {
+                        builder.append(hobby);
+                        builder.append(", ");
+                    }
 
-                mAdapter.get().setData(contacts);
-                mRecycler.setAdapter(mAdapter.get());
+                    MainApp.contactHobbiesMap.put(contactEntity.getFirstNane()+" "+contactEntity.getLastName(), builder.toString());
+                }
             }
+
+            mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+            mRecycler.setItemAnimator(new DefaultItemAnimator());
+
+            mAdapter.get().setData(contacts);
+            mRecycler.setAdapter(mAdapter.get());
         });
 
         return view;

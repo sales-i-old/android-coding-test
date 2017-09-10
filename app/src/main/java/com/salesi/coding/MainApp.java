@@ -8,6 +8,8 @@ import com.salesi.coding.di.ApplicationContext;
 import com.salesi.coding.di.ApplicationModule;
 import com.salesi.coding.di.DaggerApplicationComponent;
 
+import java.util.HashMap;
+
 import javax.inject.Inject;
 
 /**
@@ -18,7 +20,7 @@ public class MainApp extends Application {
     @Inject @ApplicationContext protected Context mApp;
 
     private ApplicationComponent mApplicationComponent;
-
+    public static HashMap contactHobbiesMap = new HashMap();
     @Override
     public void onCreate() {
         super.onCreate();
@@ -35,4 +37,5 @@ public class MainApp extends Application {
         }
         return mApplicationComponent;
     }
+
 }
