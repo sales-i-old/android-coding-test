@@ -102,7 +102,6 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             intent.setData(Uri.parse("tel:" + phoneNumber));
             mContext.startActivity(intent);
         }
-
         @OnClick(R.id.email)
         public void onEmailClick() {
             String email = mContacts.get(this.getAdapterPosition()).Email;
