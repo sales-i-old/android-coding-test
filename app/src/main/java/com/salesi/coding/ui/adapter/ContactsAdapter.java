@@ -86,6 +86,37 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         });
 
 
+        holder.mEmail.setOnClickListener(v -> {
+
+            Context context = v.getContext();
+            String send_to =  mContacts.get(position).getEmail();
+            if(send_to.isEmpty())
+            {
+                Toast.makeText(context.getApplicationContext(), "Email address not found", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", send_to, null));
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                context.startActivity(Intent.createChooser(emailIntent, "Send email..."));
+            }
+        });
+
+        holder.mPhone.setOnClickListener(v -> {
+
+            Context context = v.getContext();
+            String phone =  mContacts.get(position).getPhoneNumber();
+            if(phone.isEmpty())
+            {
+                Toast.makeText(context.getApplicationContext(), "Phone number not found", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     public String buildAddress(Address address){
