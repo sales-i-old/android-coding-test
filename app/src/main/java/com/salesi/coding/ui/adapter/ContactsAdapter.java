@@ -74,10 +74,10 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                 for (String hobby : hobbies) {
                     if(!hobby.isEmpty()) {
                         builder.append(hobby);
-                        builder.append(",");
+                        builder.append(", ");
                     }
                 }
-                if (builder.length() > 0) builder.deleteCharAt(builder.length() - 1);
+                if (builder.length() > 0) builder.deleteCharAt(builder.length() - 2);
                 intent.putExtra("Hobbies", builder.toString());
             }
             context.startActivity(intent);

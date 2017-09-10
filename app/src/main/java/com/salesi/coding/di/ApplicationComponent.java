@@ -7,7 +7,7 @@ import com.salesi.coding.MainActivity;
 import com.salesi.coding.MainApp;
 import com.salesi.coding.mapper.adapter.ContactsAPI;
 import com.salesi.coding.service.IContactService;
-import com.salesi.coding.ui.screens.FContacts;
+import com.salesi.coding.ui.screens.ContactsFragment;
 
 import javax.inject.Singleton;
 
@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 public interface ApplicationComponent {
     void inject(MainApp app);
     void inject(MainActivity activity);
-    void inject(FContacts contacts);
+    void inject(ContactsFragment contacts);
 
     @ApplicationContext Context context();
 

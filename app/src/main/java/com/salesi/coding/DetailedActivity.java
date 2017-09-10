@@ -4,13 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.TextView;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class DetailedActivity extends AppCompatActivity {
@@ -24,6 +31,7 @@ public class DetailedActivity extends AppCompatActivity {
     @Bind(R.id.textView8) TextView Address;
     @Bind(R.id.textView9) TextView Hobbies;
     @Bind(R.id.textView11) TextView others;
+    @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +39,11 @@ public class DetailedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
         ButterKnife.bind(this);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationOnClickListener(v -> {
+        mToolbar.setNavigationOnClickListener(v -> {
             onBackPressed(); // Implemented by activity
         });
-
 
         Intent intent = getIntent();
 
@@ -72,14 +78,16 @@ public class DetailedActivity extends AppCompatActivity {
                     if (pair.getValue().toString().contains(my_hobby)) {
                         if (!builder.toString().contains(pair.getKey().toString()) && !pair.getKey().toString().equals(FirstName+" "+LastName)) {
                             builder.append(pair.getKey());
-                            builder.append(",");
+                            builder.append(", ");
                         }
                     }
                 }
             }
-            if (builder.length() > 0) builder.deleteCharAt(builder.length() - 1);
+            if (builder.length() > 0) builder.deleteCharAt(builder.length() - 2);
             this.others.setText(builder.toString());
         }
+
+
 
     }
 }

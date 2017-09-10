@@ -32,14 +32,14 @@ import dagger.Lazy;
  * Copyright © 2017 sales­i
  */
 
-public class FContacts extends Fragment {
+public class ContactsFragment extends Fragment {
     @Inject protected Lazy<IContactService> mContactService;
     @Inject protected Lazy<ContactsAdapter> mAdapter;
 
     @Bind(R.id.list_contacts) protected RecyclerView mRecycler;
 
-    public static FContacts instance() {
-        return new FContacts();
+    public static ContactsFragment instance() {
+        return new ContactsFragment();
     }
 
     @Override
@@ -57,30 +57,27 @@ public class FContacts extends Fragment {
                                                              .permitAll().build();
         StrictMode.setThreadPolicy(strictPolicy);
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                List<ContactEntity> contacts = mContactService.get().fetchContacts();
+        getActivity().runOnUiThread(() -> {
+            List<ContactEntity> contacts = mContactService.get().fetchContacts();
 
-                for(ContactEntity contactEntity: contacts) {
-                    StringBuilder builder = new StringBuilder();
-                    if(contactEntity.getHobbies()!=null) {
-                        for (String hobby : contactEntity.getHobbies()) {
-                            builder.append(hobby);
-                            builder.append(",");
-                        }
-
-                        MainApp.contactHobbiesMap.put(contactEntity.getFirstNane()+" "+contactEntity.getLastName(), builder.toString());
+            for(ContactEntity contactEntity: contacts) {
+                StringBuilder builder = new StringBuilder();
+                if(contactEntity.getHobbies()!=null) {
+                    for (String hobby : contactEntity.getHobbies()) {
+                        builder.append(hobby);
+                        builder.append(", ");
                     }
+
+                    MainApp.contactHobbiesMap.put(contactEntity.getFirstNane()+" "+contactEntity.getLastName(), builder.toString());
                 }
-
-                mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
-                mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-                mRecycler.setItemAnimator(new DefaultItemAnimator());
-
-                mAdapter.get().setData(contacts);
-                mRecycler.setAdapter(mAdapter.get());
             }
+
+            mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+            mRecycler.setItemAnimator(new DefaultItemAnimator());
+
+            mAdapter.get().setData(contacts);
+            mRecycler.setAdapter(mAdapter.get());
         });
 
         return view;

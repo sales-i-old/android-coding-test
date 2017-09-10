@@ -1,8 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -12,56 +18,41 @@ android:orientation="vertical">
 
     <TextView
         android:id="@+id/ContactID"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        style="@style/CodeFont"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/toolbar"
-        android:layout_marginTop="29dp"
         android:layout_marginLeft="28dp"
         android:layout_marginStart="28dp"
         android:text="ContactID:" />
 
     <TextView
         android:id="@+id/Title"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        style="@style/CodeFont"
         android:text="Title:"
-        android:layout_marginTop="29dp"
         android:layout_below="@+id/ContactID"
         android:layout_alignLeft="@+id/ContactID"
         android:layout_alignStart="@+id/ContactID" />
 
     <TextView
         android:id="@+id/FirstName"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        style="@style/CodeFont"
         android:text="FirstName:"
-        android:layout_marginTop="29dp"
         android:layout_below="@+id/Title"
         android:layout_alignLeft="@+id/Title"
         android:layout_alignStart="@+id/Title" />
 
     <TextView
         android:id="@+id/LastName"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        style="@style/CodeFont"
         android:text="LastName:"
-        android:layout_marginTop="29dp"
         android:layout_below="@+id/FirstName"
         android:layout_alignLeft="@+id/FirstName"
         android:layout_alignStart="@+id/FirstName" />
 
     <TextView
         android:id="@+id/JobTitle"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        style="@style/CodeFont"
         android:text="JobTitle:"
         android:layout_below="@+id/LastName"
         android:layout_alignLeft="@+id/LastName"
@@ -69,10 +60,7 @@ android:orientation="vertical">
 
     <TextView
         android:id="@+id/PhoneNumber"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        style="@style/CodeFont"
         android:text="PhoneNumber:"
         android:layout_below="@+id/JobTitle"
         android:layout_alignLeft="@+id/JobTitle"
@@ -80,10 +68,7 @@ android:orientation="vertical">
 
     <TextView
         android:id="@+id/Email"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        style="@style/CodeFont"
         android:text="Email:"
         android:layout_below="@+id/PhoneNumber"
         android:layout_alignLeft="@+id/PhoneNumber"
@@ -91,10 +76,7 @@ android:orientation="vertical">
 
     <TextView
         android:id="@+id/Address"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        style="@style/CodeFont"
         android:text="Address:"
         android:layout_below="@+id/Email"
         android:layout_alignLeft="@+id/Email"
@@ -102,10 +84,7 @@ android:orientation="vertical">
 
     <TextView
         android:id="@+id/Hobbies"
-        android:textStyle="bold"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        style="@style/CodeFont"
         android:text="Hobbies:"
         android:layout_below="@+id/Address"
         android:layout_alignLeft="@+id/Address"
@@ -202,10 +181,7 @@ android:orientation="vertical">
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
-        android:textStyle="bold"
+        style="@style/CodeFont"
         android:layout_alignLeft="@+id/Hobbies"
         android:layout_alignStart="@+id/Hobbies"
         android:layout_below="@+id/Hobbies"
@@ -223,4 +199,5 @@ android:orientation="vertical">
         android:layout_alignStart="@+id/textView9" />
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

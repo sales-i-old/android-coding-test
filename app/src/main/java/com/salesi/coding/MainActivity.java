@@ -9,7 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import com.salesi.coding.ui.adapter.TabsAdapter;
+
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -19,12 +23,14 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.view_pager) protected ViewPager mViewPager;
     @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
