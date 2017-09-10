@@ -9,28 +9,21 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin">
-
     <TextView
-        android:text="885"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp"
         android:layout_marginTop="11dp"
         android:id="@+id/contact_id"
         android:typeface="serif" />
 
     <TextView
-        android:text="Arriva PLC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/contact_id"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginRight="12dp"
         android:layout_marginEnd="12dp"
         android:id="@+id/contact_name"
         android:textColor="@android:color/holo_blue_dark"
@@ -46,15 +39,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@android:drawable/stat_sys_phone_call"
-        android:layout_marginLeft="74dp"
         android:layout_marginStart="74dp"
         android:id="@+id/phone"
         android:layout_below="@+id/contact_id"
-        android:layout_toRightOf="@+id/contact_id"
         android:layout_toEndOf="@+id/contact_id"
         android:tintMode="src_in"
         android:tint="@android:color/holo_red_light"
-        tools:targetApi="ICE_CREAM_SANDWICH" />
+        tools:targetApi="ICE_CREAM_SANDWICH"
+        android:contentDescription="@string/img_phone_description"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -66,6 +58,7 @@
         android:tint="@android:color/holo_red_light"
         android:tintMode="src_in"
         tools:targetApi="ICE_CREAM_SANDWICH"
-        android:layout_alignBaseline="@+id/phone" />
+        android:layout_alignBaseline="@+id/phone"
+        android:contentDescription="@string/img_email_description"/>
 
 </RelativeLayout>
