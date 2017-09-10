@@ -88,38 +88,42 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
 
         holder.mEmail.setOnClickListener(v -> {
-
-            Context context = v.getContext();
-            String send_to =  mContacts.get(position).getEmail();
-            if(send_to.isEmpty())
-            {
-                Toast.makeText(context.getApplicationContext(), "Email address not found", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto", send_to, null));
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
-                context.startActivity(Intent.createChooser(emailIntent, "Send email..."));
-            }
+            email( position,v.getContext());
         });
 
         holder.mPhone.setOnClickListener(v -> {
-
-            Context context = v.getContext();
-            String phone =  mContacts.get(position).getPhoneNumber();
-            if(phone.isEmpty())
-            {
-                Toast.makeText(context.getApplicationContext(), "Phone number not found", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null));
-                context.startActivity(intent);
-            }
+            phoneCall( position,v.getContext());
         });
 
     }
 
+    public void email(int position,Context context)
+    {
+        String send_to =  mContacts.get(position).getEmail();
+        if(send_to.isEmpty())
+        {
+            Toast.makeText(context.getApplicationContext(),  context.getString(R.string.email_not_found), Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(Constants.MAILTO, send_to, null));
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, Constants.SUBJECT);
+            emailIntent.putExtra(Intent.EXTRA_TEXT, Constants.BODY);
+            context.startActivity(Intent.createChooser(emailIntent, context.getString(R.string.send_email)));
+        }
+    }
+
+    public void phoneCall(int position,Context context)
+    {
+        String phone =  mContacts.get(position).getPhoneNumber();
+        if(phone.isEmpty())
+        {
+            Toast.makeText(context.getApplicationContext(), context.getString(R.string.phone_not_found), Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts(Constants.TEL, phone, null));
+            context.startActivity(intent);
+        }
+    }
     public String buildAddress(Address address){
         StringBuilder builder = new StringBuilder();
         Boolean append_comma = false;

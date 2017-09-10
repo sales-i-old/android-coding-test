@@ -11,4 +11,8 @@ public class Constants {
     public static final String HOBBIES =        "Hobbies";
     public static final String ADDRESS =        "Address";
 
+    public static final String MAILTO =        "mailto";
+    public static final String TEL =        "tel";
+    public static final String SUBJECT =        "Subject";
+    public static final String BODY =        "Body";
 }
