@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary" />
+
+    <TextView
+        android:id="@+id/ContactID"
+        android:textStyle="bold"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginTop="29dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:text="ContactID:" />
+
+    <TextView
+        android:id="@+id/Title"
+        android:textStyle="bold"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Title:"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/ContactID"
+        android:layout_alignLeft="@+id/ContactID"
+        android:layout_alignStart="@+id/ContactID" />
+
+    <TextView
+        android:id="@+id/FirstName"
+        android:textStyle="bold"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="FirstName:"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/Title"
+        android:layout_alignLeft="@+id/Title"
+        android:layout_alignStart="@+id/Title" />
+
+    <TextView
+        android:id="@+id/LastName"
+        android:textStyle="bold"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="LastName:"
+        android:layout_marginTop="29dp"
+        android:layout_below="@+id/FirstName"
+        android:layout_alignLeft="@+id/FirstName"
+        android:layout_alignStart="@+id/FirstName" />
+
+    <TextView
+        android:id="@+id/JobTitle"
+        android:textStyle="bold"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="JobTitle:"
+        android:layout_below="@+id/LastName"
+        android:layout_alignLeft="@+id/LastName"
+        android:layout_alignStart="@+id/LastName" />
+
+    <TextView
+        android:id="@+id/PhoneNumber"
+        android:textStyle="bold"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="PhoneNumber:"
+        android:layout_below="@+id/JobTitle"
+        android:layout_alignLeft="@+id/JobTitle"
+        android:layout_alignStart="@+id/JobTitle" />
+
+    <TextView
+        android:id="@+id/Email"
+        android:textStyle="bold"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="Email:"
+        android:layout_below="@+id/PhoneNumber"
+        android:layout_alignLeft="@+id/PhoneNumber"
+        android:layout_alignStart="@+id/PhoneNumber" />
+
+    <TextView
+        android:id="@+id/Address"
+        android:textStyle="bold"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="Address:"
+        android:layout_below="@+id/Email"
+        android:layout_alignLeft="@+id/Email"
+        android:layout_alignStart="@+id/Email" />
+
+    <TextView
+        android:id="@+id/Hobbies"
+        android:textStyle="bold"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:text="Hobbies:"
+        android:layout_below="@+id/Address"
+        android:layout_alignLeft="@+id/Address"
+        android:layout_alignStart="@+id/Address" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/ContactID"
+        android:layout_alignBottom="@+id/ContactID"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/Title"
+        android:layout_alignBottom="@+id/Title"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/FirstName"
+        android:layout_alignBottom="@+id/FirstName"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/LastName"
+        android:layout_alignBottom="@+id/LastName"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/JobTitle"
+        android:layout_alignBottom="@+id/JobTitle"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/PhoneNumber"
+        android:layout_alignBottom="@+id/PhoneNumber"
+        android:layout_alignLeft="@+id/textView5"
+        android:layout_alignStart="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/Email"
+        android:layout_alignBottom="@+id/Email"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/Address"
+        android:layout_alignBottom="@+id/Address"
+        android:layout_alignLeft="@+id/textView7"
+        android:layout_alignStart="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignBaseline="@+id/Hobbies"
+        android:layout_alignBottom="@+id/Hobbies"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:textStyle="bold"
+        android:layout_alignLeft="@+id/Hobbies"
+        android:layout_alignStart="@+id/Hobbies"
+        android:layout_below="@+id/Hobbies"
+        android:text="Contacts with same Hobbies:"
+        android:layout_alignRight="@+id/Hobbies"
+        android:layout_alignEnd="@+id/Hobbies" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView10"
+        android:layout_alignBottom="@+id/textView10"
+        android:layout_alignLeft="@+id/textView9"
+        android:layout_alignStart="@+id/textView9" />
+
+
+</RelativeLayout>

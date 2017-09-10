@@ -62,6 +62,18 @@ public class FContacts extends Fragment {
             public void run() {
                 List<ContactEntity> contacts = mContactService.get().fetchContacts();
 
+                for(ContactEntity contactEntity: contacts) {
+                    StringBuilder builder = new StringBuilder();
+                    if(contactEntity.getHobbies()!=null) {
+                        for (String hobby : contactEntity.getHobbies()) {
+                            builder.append(hobby);
+                            builder.append(",");
+                        }
+
+                        MainApp.contactHobbiesMap.put(contactEntity.getFirstNane()+" "+contactEntity.getLastName(), builder.toString());
+                    }
+                }
+
                 mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
                 mRecycler.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
                 mRecycler.setItemAnimator(new DefaultItemAnimator());
