@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.salesi.coding.DetailedActivity;
 import com.salesi.coding.R;
+import com.salesi.coding.common.Constants;
 import com.salesi.coding.entity.Address;
 import com.salesi.coding.entity.ContactEntity;
 
@@ -56,17 +57,17 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         holder.mName.setOnClickListener(v -> {
             Context context = v.getContext();
             Intent intent = new Intent(context, DetailedActivity.class);
-            intent.putExtra("ContactID", mContacts.get(position).getContactID() + "");
-            intent.putExtra("Title", mContacts.get(position).getTitle());
-            intent.putExtra("FirstName", mContacts.get(position).getFirstNane());
-            intent.putExtra("LastName", mContacts.get(position).getLastName());
-            intent.putExtra("JobTitle", mContacts.get(position).getTitle());
-            intent.putExtra("PhoneNumber", mContacts.get(position).getPhoneNumber());
-            intent.putExtra("Email", mContacts.get(position).getEmail());
+            intent.putExtra(Constants.CONTACT_ID, mContacts.get(position).getContactID() + "");
+            intent.putExtra(Constants.TITLE, mContacts.get(position).getTitle());
+            intent.putExtra(Constants.FIRST_NAME, mContacts.get(position).getFirstNane());
+            intent.putExtra(Constants.LAST_NAME, mContacts.get(position).getLastName());
+            intent.putExtra(Constants.JOB_TITLE, mContacts.get(position).getTitle());
+            intent.putExtra(Constants.PHONE_NUMBER, mContacts.get(position).getPhoneNumber());
+            intent.putExtra(Constants.EMAIL, mContacts.get(position).getEmail());
 
             Address address = mContacts.get(position).getAddress();
             if (address != null) {
-                intent.putExtra("Address", buildAddress(address));
+                intent.putExtra(Constants.ADDRESS, buildAddress(address));
             }
             StringBuilder builder = new StringBuilder();
             List<String> hobbies = mContacts.get(position).getHobbies();
@@ -78,7 +79,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
                     }
                 }
                 if (builder.length() > 0) builder.deleteCharAt(builder.length() - 2);
-                intent.putExtra("Hobbies", builder.toString());
+                intent.putExtra(Constants.HOBBIES, builder.toString());
             }
             context.startActivity(intent);
 

@@ -8,6 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class ContactsFragment extends Fragment {
 
         getActivity().runOnUiThread(() -> {
             List<ContactEntity> contacts = mContactService.get().fetchContacts();
+            Log.i("myapp","calling fetchContacts");
 
             for(ContactEntity contactEntity: contacts) {
                 StringBuilder builder = new StringBuilder();

@@ -4,20 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.widget.TextView;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import com.salesi.coding.common.Constants;
+import com.salesi.coding.common.Utils;
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 
 public class DetailedActivity extends AppCompatActivity {
@@ -30,7 +21,7 @@ public class DetailedActivity extends AppCompatActivity {
     @Bind(R.id.textView7) TextView Email;
     @Bind(R.id.textView8) TextView Address;
     @Bind(R.id.textView9) TextView Hobbies;
-    @Bind(R.id.textView11) TextView others;
+    @Bind(R.id.textView11) TextView otherContactsWithSameHobbies;
     @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
     @Override
@@ -47,15 +38,15 @@ public class DetailedActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String ContactID = intent.getStringExtra("ContactID");
-        String Title = intent.getStringExtra("Title");
-        String FirstName = intent.getStringExtra("FirstName");
-        String LastName = intent.getStringExtra("LastName");
-        String JobTitle = intent.getStringExtra("JobTitle");
-        String PhoneNumber = intent.getStringExtra("PhoneNumber");
-        String Email = intent.getStringExtra("Email");
-        String Address = intent.getStringExtra("Address");
-        String Hobbies = intent.getStringExtra("Hobbies");
+        String ContactID = intent.getStringExtra(Constants.CONTACT_ID);
+        String Title = intent.getStringExtra(Constants.TITLE);
+        String FirstName = intent.getStringExtra(Constants.FIRST_NAME);
+        String LastName = intent.getStringExtra(Constants.LAST_NAME);
+        String JobTitle = intent.getStringExtra(Constants.JOB_TITLE);
+        String PhoneNumber = intent.getStringExtra(Constants.PHONE_NUMBER);
+        String Email = intent.getStringExtra(Constants.EMAIL);
+        String Address = intent.getStringExtra(Constants.ADDRESS);
+        String Hobbies = intent.getStringExtra(Constants.HOBBIES);
 
         this.ContactID.setText(ContactID);
         this.Title.setText(Title);
@@ -66,28 +57,6 @@ public class DetailedActivity extends AppCompatActivity {
         this.Email.setText(Email);
         this.Address.setText(Address);
         this.Hobbies.setText(Hobbies);
-
-        StringBuilder builder = new StringBuilder();
-        if(Hobbies!=null && !Hobbies.isEmpty()) {
-            List<String> hobbiesList = Arrays.asList(Hobbies.split(","));
-            for (String my_hobby : hobbiesList) {
-                my_hobby = my_hobby.trim();
-                Iterator it = MainApp.contactHobbiesMap.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry pair = (Map.Entry) it.next();
-                    if (pair.getValue().toString().contains(my_hobby)) {
-                        if (!builder.toString().contains(pair.getKey().toString()) && !pair.getKey().toString().equals(FirstName+" "+LastName)) {
-                            builder.append(pair.getKey());
-                            builder.append(", ");
-                        }
-                    }
-                }
-            }
-            if (builder.length() > 0) builder.deleteCharAt(builder.length() - 2);
-            this.others.setText(builder.toString());
-        }
-
-
-
+        this.otherContactsWithSameHobbies.setText(Utils.getContacts(Hobbies,FirstName+" "+LastName));
     }
 }
