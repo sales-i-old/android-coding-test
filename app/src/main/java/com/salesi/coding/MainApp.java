@@ -15,7 +15,9 @@ import javax.inject.Inject;
  * Copyright © 2017 sales­i
  */
 public class MainApp extends Application {
-    @Inject @ApplicationContext protected Context mApp;
+    @Inject
+    @ApplicationContext
+    protected Context mApp;
 
     private ApplicationComponent mApplicationComponent;
 
@@ -23,12 +25,12 @@ public class MainApp extends Application {
     public void onCreate() {
         super.onCreate();
 
-        if(null == mApplicationComponent) mApplicationComponent = getComponent();
+        if (null == mApplicationComponent) mApplicationComponent = getComponent();
         mApplicationComponent.inject(this);
     }
 
     public ApplicationComponent getComponent() {
-        if(null == mApplicationComponent) {
+        if (null == mApplicationComponent) {
             mApplicationComponent = DaggerApplicationComponent.builder()
                     .applicationModule(new ApplicationModule(this))
                     .build();
