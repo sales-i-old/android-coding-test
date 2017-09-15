@@ -3,6 +3,8 @@ package com.salesi.coding;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -53,5 +55,27 @@ public class ContactDetails extends AppCompatActivity {
         mEmail.setText(email);
         mHobbies.setText(hobbies.toString());
         mAddressLine1.setText(address.toString());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.exitApp:
+                Intent intent = new Intent(Intent.ACTION_MAIN);
+                intent.addCategory(Intent.CATEGORY_HOME);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                break;
+
+            default:
+                break;
+        }
+        return true;
     }
 }
