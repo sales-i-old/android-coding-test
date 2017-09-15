@@ -2,14 +2,17 @@ package com.salesi.coding.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.salesi.coding.ContactDetails;
 import com.salesi.coding.R;
@@ -24,6 +27,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Contacts view adapter
@@ -111,6 +115,32 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             contactsBundle.putString("address", addressResult);
             detailViewIntent.putExtras(contactsBundle);
             mContext.startActivity(detailViewIntent);
+        }
+
+        @OnClick(R.id.phone)
+        public void onPhoneClick(){
+            String phoneNumber = mContacts.get(this.getAdapterPosition()).PhoneNumber;
+            if(TextUtils.isEmpty(phoneNumber)){
+                Toast.makeText(mContext, "Phone number is not available", Toast.LENGTH_LONG).show();
+            }else{
+                Intent phoneIntent = new Intent(Intent.ACTION_DIAL);
+                phoneIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                phoneIntent.setData(Uri.parse("tel:" + phoneNumber));
+                mContext.startActivity(phoneIntent);
+            }
+        }
+
+        @OnClick(R.id.email)
+        public void onEmailClick(){
+            String emailaddress = mContacts.get(this.getAdapterPosition()).Email;
+            if(TextUtils.isEmpty(emailaddress)){
+                Toast.makeText(mContext, "Email address is not available", Toast.LENGTH_LONG).show();
+            }else{
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("mailto", emailaddress, null));
+                emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                mContext.startActivity(Intent.createChooser(emailIntent, "Send Email"));
+            }
         }
     }
 
