@@ -61,7 +61,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
         public void bind(ContactEntity entity) {
             mId.setText(String.valueOf(entity.ContactID));
-            mName.setText(String.format(Locale.UK, "%1$s %2$s", entity.FirstName, entity.LastName));
+            mName.setText(String.format(Locale.UK, "%1$s %2$s", entity.FirstNane, entity.LastName));
         }
     }
 }
