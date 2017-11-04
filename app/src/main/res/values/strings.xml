@@ -6,4 +6,6 @@
     <!-- Default Strings Values -->
     <string name="contact_id_default">885</string>
     <string name="contact_name_default">Arriva PLC</string>
+
+    <string name="close_app">Close App</string>
 </resources>

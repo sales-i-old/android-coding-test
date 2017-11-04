@@ -5,6 +5,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.salesi.coding.ui.adapter.TabsAdapter;
 
@@ -29,5 +31,23 @@ public class MainActivity extends AppCompatActivity {
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager(), getApplicationContext());
         mViewPager.setAdapter(adapter);
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.close_app_option) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

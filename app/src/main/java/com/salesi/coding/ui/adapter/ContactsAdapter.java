@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
@@ -17,6 +18,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Contacts view adapter
@@ -53,6 +55,18 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
     class ViewHolder extends RecyclerView.ViewHolder {
         @Nullable @Bind(R.id.contact_id) protected TextView mId;
         @Nullable @Bind(R.id.contact_name) protected TextView mName;
+
+        @OnClick(R.id.phone)
+        void callContact() {
+            //TODO Implement Call feature
+            Toast.makeText(itemView.getContext(), "Calling contact...", Toast.LENGTH_SHORT).show();
+        }
+
+        @OnClick(R.id.email)
+        void emailContact() {
+            //TODO Implement Email feature
+            Toast.makeText(itemView.getContext(), "Emailing contact...", Toast.LENGTH_SHORT).show();
+        }
 
         public ViewHolder(View itemView) {
             super(itemView);
