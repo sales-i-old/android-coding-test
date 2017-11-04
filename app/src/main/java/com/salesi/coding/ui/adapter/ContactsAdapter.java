@@ -11,6 +11,7 @@ import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -59,8 +60,8 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
         }
 
         public void bind(ContactEntity entity) {
-            mId.setText(entity.ContactID);
-            mName.setText(entity.FirstName+" "+entity.LastName);
+            mId.setText(String.valueOf(entity.ContactID));
+            mName.setText(String.format(Locale.UK, "%1$s %2$s", entity.FirstName, entity.LastName));
         }
     }
 }
