@@ -24,9 +24,8 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch(position) {
-            case 0 : {
+            case 0 :
                 return FContacts.instance();
-            }
         }
         return null;
     }
@@ -34,9 +33,8 @@ public class TabsAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch(position) {
-            case 0 : {
+            case 0 :
                 return mContext.getString(R.string.title_tab_question_1);
-            }
         }
         return null;
     }

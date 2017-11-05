@@ -2,4 +2,10 @@
     <string name="app_name">CodingTest</string>
     <string name="base_url">http://www.mocky.io/</string>
     <string name="title_tab_question_1">Contacts</string>
+
+    <!-- Default Strings Values -->
+    <string name="contact_id_default">885</string>
+    <string name="contact_name_default">Arriva PLC</string>
+
+    <string name="close_app">Close App</string>
 </resources>

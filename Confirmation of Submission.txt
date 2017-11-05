@@ -1,0 +1,21 @@
+Dear Sales-i
+
+The following project contains my submitted code for the requirements specified within your github page
+(https://github.com/sales-i/android-coding-test).
+
+I just wanted to affirm and let you know that I implemented as many of the requirements as I could
+within the two hour time limit, unfortunately  I couldn't implement them all.
+
+I didn't get a chance to implement tasks iV and V.
+
+If I did have enough time I would have done the following:
+
+*Implement and injected the RuntimePermissions class
+*Added the necessary permissions within the manifest
+*Checked that the device running the app could make phone calls and had an network connection
+*Check if they had permission granted, and if not request them.
+*Store the granted permission within the onActivityResult callback
+
+Looking forward to hearing from you.
+
+James
