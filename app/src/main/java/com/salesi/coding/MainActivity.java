@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.salesi.coding.ui.Fragments.DetailFragment;
 import com.salesi.coding.ui.adapter.TabsAdapter;
 
 import butterknife.Bind;
@@ -18,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
     @Bind(R.id.view_pager) protected ViewPager mViewPager;
     @Bind(R.id.toolbar) protected Toolbar mToolbar;
 
+    public static final String DETAILFRAGMENT_TAG = "DFTAG";
+    public static final String CONTACTFRAGMENT_TAG = "CFTAG";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+
+        if (findViewById(R.id.contact_detail_container) != null) {
+            if (savedInstanceState == null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contact_detail_container, new DetailFragment(), DETAILFRAGMENT_TAG)
+                        .commit();
+            }
+        }
 
         TabsAdapter adapter = new TabsAdapter(getSupportFragmentManager(), getApplicationContext());
         mViewPager.setAdapter(adapter);

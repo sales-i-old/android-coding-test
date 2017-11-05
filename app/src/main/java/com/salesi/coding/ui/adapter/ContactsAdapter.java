@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.salesi.coding.MainApp;
 import com.salesi.coding.R;
 import com.salesi.coding.entity.ContactEntity;
 
@@ -27,12 +29,20 @@ import butterknife.OnClick;
  */
 public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHolder> {
     private List<ContactEntity> mContacts;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(ContactEntity item);
+    }
+
 
     @Inject
-    public ContactsAdapter() {}
+    public ContactsAdapter() {
+    }
 
-    public void setData(List<ContactEntity> contacts) {
-        mContacts = contacts;
+    public void setData(List<ContactEntity> contacts, OnItemClickListener listener) {
+        this.mContacts = contacts;
+        this.listener = listener;
     }
 
     @Override
@@ -44,7 +54,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.bind(mContacts.get(position));
+        holder.bind(mContacts.get(position), listener);
     }
 
     @Override
@@ -73,9 +83,15 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             ButterKnife.bind(this, itemView);
         }
 
-        public void bind(ContactEntity entity) {
+        public void bind(final ContactEntity entity, final OnItemClickListener listener) {
             mId.setText(String.valueOf(entity.ContactID));
             mName.setText(String.format(Locale.UK, "%1$s %2$s", entity.FirstNane, entity.LastName));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(entity);
+                }
+            });
         }
     }
 }
